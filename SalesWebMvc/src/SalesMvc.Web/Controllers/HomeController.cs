@@ -13,5 +13,20 @@ namespace SalesMvc.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult RegisterCostumer()
+        {
+            return View();
+        }
+
+        public IActionResult ShoppingCart()
+        {
+            return View();
+        }
     }
 }
