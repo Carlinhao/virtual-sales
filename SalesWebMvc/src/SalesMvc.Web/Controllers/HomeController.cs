@@ -23,5 +23,10 @@ namespace SalesMvc.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult ShoppingCart()
+        {
+            return View();
+        }
     }
 }
