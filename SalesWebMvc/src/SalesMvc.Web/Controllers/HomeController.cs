@@ -18,5 +18,10 @@ namespace SalesMvc.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult RegisterCostumer()
+        {
+            return View();
+        }
     }
 }
