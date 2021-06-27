@@ -13,5 +13,10 @@ namespace SalesMvc.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
     }
 }
