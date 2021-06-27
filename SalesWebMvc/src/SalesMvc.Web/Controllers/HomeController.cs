@@ -14,6 +14,11 @@ namespace SalesMvc.Web.Controllers
             return View();
         }
 
+        public IActionResult ActionContact()
+        {
+            return new ContentResult { Content = "Data received success!" };
+        }
+
         public IActionResult Login()
         {
             return View();
