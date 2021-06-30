@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesMvc.Web.Libraries.Email;
+using SalesMvc.Web.Models;
 
 namespace SalesMvc.Web.Controllers
 {
@@ -16,7 +18,14 @@ namespace SalesMvc.Web.Controllers
 
         public IActionResult ActionContact()
         {
-            return new ContentResult { Content = "Data received success!" };
+            Contact contact = new Contact();
+            contact.Name = HttpContext.Request.Form["name"];
+            contact.Email = HttpContext.Request.Form["email"];
+            contact.Text = HttpContext.Request.Form["text"];
+
+            ContactEmail.SendContactEmail(contact);
+
+            return View("Contact");
         }
 
         public IActionResult Login()
