@@ -16,7 +16,22 @@ namespace SalesMvc.Web.Libraries.Email
             smtpClient.Credentials = new NetworkCredential("","");
             smtpClient.EnableSsl = true;
 
+
+
+            /*
+             * Body message
+             */
+
+            string bodyMessage = string.Format($"<h2> Virtual Sale </h2> <br/> {contact.Name} <br/> {contact.Email} <br/> {contact.Text}");
+
             MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("");
+            mailMessage.To.Add("");
+            mailMessage.Subject = "Teste" + contact.Email;
+            mailMessage.Body = bodyMessage;
+            mailMessage.IsBodyHtml = true;
+            
+            smtpClient.Send(mailMessage);
         }
     }
 }
