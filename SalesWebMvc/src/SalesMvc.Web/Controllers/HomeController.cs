@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
 using SalesMvc.Web.Models;
 
@@ -18,12 +19,24 @@ namespace SalesMvc.Web.Controllers
 
         public IActionResult ActionContact()
         {
-            Contact contact = new Contact();
-            contact.Name = HttpContext.Request.Form["name"];
-            contact.Email = HttpContext.Request.Form["email"];
-            contact.Text = HttpContext.Request.Form["text"];
+            try
+            {
+                Contact contact = new Contact
+                {
+                    Name = HttpContext.Request.Form["name"],
+                    Email = HttpContext.Request.Form["email"],
+                    Text = HttpContext.Request.Form["text"]
+                };
+                ViewData["MSG_S"] = "Send message success!";
 
-            ContactEmail.SendContactEmail(contact);
+                ContactEmail.SendContactEmail(contact);
+            }
+            catch (Exception)
+            {
+                ViewData["MSG_E"] = "Ops.. something is wrong!";
+                
+                // TODO - Write log
+            }
 
             return View("Contact");
         }
