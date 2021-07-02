@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
 using SalesMvc.Web.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SalesMvc.Web.Controllers
 {
@@ -26,10 +29,27 @@ namespace SalesMvc.Web.Controllers
                     Name = HttpContext.Request.Form["name"],
                     Email = HttpContext.Request.Form["email"],
                     Text = HttpContext.Request.Form["text"]
-                };
-                ViewData["MSG_S"] = "Send message success!";
+                };               
 
-                ContactEmail.SendContactEmail(contact);
+                var errorList = new List<ValidationResult>();
+                var context = new ValidationContext(contact);
+                bool isValid = Validator.TryValidateObject(contact, context, errorList, true);
+
+                if (isValid)
+                {
+                    ContactEmail.SendContactEmail(contact);
+                    ViewData["MSG_S"] = "Send message success!";
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var item in errorList)
+                    {
+                        sb.Append(item.ErrorMessage);
+                    }
+                    ViewData["MSG_E"] = sb.ToString();
+                }
+
             }
             catch (Exception)
             {
