@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
 using SalesMvc.Web.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SalesMvc.Web.Controllers
 {
@@ -18,12 +22,41 @@ namespace SalesMvc.Web.Controllers
 
         public IActionResult ActionContact()
         {
-            Contact contact = new Contact();
-            contact.Name = HttpContext.Request.Form["name"];
-            contact.Email = HttpContext.Request.Form["email"];
-            contact.Text = HttpContext.Request.Form["text"];
+            try
+            {
+                Contact contact = new Contact
+                {
+                    Name = HttpContext.Request.Form["name"],
+                    Email = HttpContext.Request.Form["email"],
+                    Text = HttpContext.Request.Form["text"]
+                };               
 
-            ContactEmail.SendContactEmail(contact);
+                var errorList = new List<ValidationResult>();
+                var context = new ValidationContext(contact);
+                bool isValid = Validator.TryValidateObject(contact, context, errorList, true);
+
+                if (isValid)
+                {
+                    ContactEmail.SendContactEmail(contact);
+                    ViewData["MSG_S"] = "Send message success!";
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var item in errorList)
+                    {
+                        sb.Append(item.ErrorMessage);
+                    }
+                    ViewData["MSG_E"] = sb.ToString();
+                }
+
+            }
+            catch (Exception)
+            {
+                ViewData["MSG_E"] = "Ops.. something is wrong!";
+                
+                // TODO - Write log
+            }
 
             return View("Contact");
         }
