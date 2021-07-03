@@ -1,6 +1,6 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Contact";
+    SalesMvc.Web.Models.Contact contact = (SalesMvc.Web.Models.Contact)ViewData["CONTACT"];
 }
 
 <main role="main">
@@ -26,8 +26,8 @@
                             <dt>SAC:</dt>
                             <dd>sac@lojavirtual.com.br</dd>
                         </dl>
-                    </div> <!-- box.// -->
-                </div> <!-- code-wrap.// -->
+                    </div>
+                </div>
             </aside>
             <aside class="col-sm-6">
 
@@ -55,9 +55,9 @@
                                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         </div>
                                         <input type="text" id="name" class="form-control" name="name" placeholder=""
-                                               required="">
-                                    </div> <!-- input-group.// -->
-                                </div> <!-- form-group.// -->
+                                               required="" value="@(contact != null ? contact.Name : "")">
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
@@ -65,27 +65,25 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-at"></i></span>
                                         </div>
-                                        <input type="text" id="email" class="form-control" name="email" placeholder="">
-                                    </div> <!-- input-group.// -->
-                                </div> <!-- form-group.// -->
-
+                                        <input type="text" id="email" class="form-control" name="email" value="@(contact != null ? contact.Email : "")" placeholder="">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="text"><span class="hidden-xs">Text</span> </label>
                                             <div class="form-inline">
-                                                <textarea class="form-control" name="text" id="text" style="width:100%"></textarea>
-
+                                                <textarea class="form-control" name="text" id="text" style="width:100%">@(contact != null ? contact.Text : "")</textarea>
                                             </div>
                                         </div>
                                     </div>
-                                </div> <!-- row.// -->
+                                </div>
                                 <button class="subscribe btn btn-primary btn-block" type="submit"> Send </button>
                             </form>
-                        </div> <!-- card-body.// -->
-                    </article> <!-- card.// -->
+                        </div>
+                    </article>
 
-                </div> <!-- code-wrap.// -->
+                </div>
 
             </aside>
         </div>

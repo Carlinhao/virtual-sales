@@ -45,9 +45,11 @@ namespace SalesMvc.Web.Controllers
                     StringBuilder sb = new StringBuilder();
                     foreach (var item in errorList)
                     {
-                        sb.Append(item.ErrorMessage);
+                        sb.Append(item.ErrorMessage + "<br />");
                     }
+
                     ViewData["MSG_E"] = sb.ToString();
+                    ViewData["CONTACT"] = contact;
                 }
 
             }
