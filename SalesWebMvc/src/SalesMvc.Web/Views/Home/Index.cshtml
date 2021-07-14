@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SalesMvc.Web.Models.NewsLetterEmail
+
+@{
 	ViewData["Title"] = "Index";
 }
 
@@ -156,25 +158,25 @@
 	</div>
 </main>
 
-<form role="form" method="post" action="/Home/ActionContact">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6 offset-sm-2">
-				<div class="form-group">
-					<label for="name">Register to receive promotions</label>
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
-						</div>
-						<input type="text" id="name" class="form-control" name="name" placeholder=""
-							   required="" value="">
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 offset-sm-2">
+			<div class="form-group">
+				<label for="name">Register to receive promotions</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fa fa-envelope"></i></span>
 					</div>
+					@Html.EditorFor(x => x.Email)
 				</div>
 			</div>
-			<div class="col-sm-2">
+		</div>
+		<div class="col-sm-2">
 			<br />
-				<button class="subscribe btn btn-primary btn-block" type="submit"> Send </button>
-			</div>
+			<button class="subscribe btn btn-primary btn-block" type="submit"> Send </button>
 		</div>
 	</div>
-</form>
+</div>
+}
