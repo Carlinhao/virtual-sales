@@ -169,8 +169,9 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fa fa-envelope"></i></span>
 					</div>
-					@Html.EditorFor(x => x.Email)
+					@Html.EditorFor(x => x.Email, new { htmlAttributes = new{ @class = "form-control" }})
 				</div>
+				<span style="color: red;">@Html.ValidationMessageFor(m => m.Email)</span>
 			</div>
 		</div>
 		<div class="col-sm-2">
