@@ -10,9 +10,24 @@ namespace SalesMvc.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index([FromBody] NewsLetterEmail newsLetterEmail)
+        {
+            if(ModelState.IsValid)
+            {
+                // TODO - Add register in bd
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Contact()
