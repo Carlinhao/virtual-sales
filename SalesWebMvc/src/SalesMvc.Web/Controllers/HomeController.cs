@@ -5,11 +5,19 @@ using SalesMvc.Web.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Text;
+using SalesMvc.Web.DataBase;
 
 namespace SalesMvc.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -21,7 +29,10 @@ namespace SalesMvc.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                // TODO - Add register in bd
+                _context.NewsLetterEmails.Add(newsLetterEmail);
+                _context.SaveChanges();
+
+                TempData["MSG_S"] = "Send email with success!";
                 return RedirectToAction(nameof(Index));
             }
             else
