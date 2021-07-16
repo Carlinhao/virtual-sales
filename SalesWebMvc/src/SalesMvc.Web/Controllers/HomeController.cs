@@ -25,7 +25,7 @@ namespace SalesMvc.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index([FromBody] NewsLetterEmail newsLetterEmail)
+        public IActionResult Index([FromForm] NewsLetterEmail newsLetterEmail)
         {
             if(ModelState.IsValid)
             {
