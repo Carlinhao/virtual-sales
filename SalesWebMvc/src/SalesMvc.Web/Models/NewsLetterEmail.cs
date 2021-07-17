@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 using SalesMvc.Web.Libraries.Lang;
 
 namespace SalesMvc.Web.Models
@@ -7,8 +8,8 @@ namespace SalesMvc.Web.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Message), ErrorMessage = "MSG_E001")]
-        [EmailAddress(ErrorMessageResourceType = typeof(Message), ErrorMessage = "MSG_E004")]
+        [Required(ErrorMessage = null, ErrorMessageResourceName = "MSG_E001", ErrorMessageResourceType = typeof(Message))]
+        [EmailAddress(ErrorMessage = null, ErrorMessageResourceName = "MSG_E004", ErrorMessageResourceType = typeof(Message) )]
         public string Email { get; set; }
     }
 }
