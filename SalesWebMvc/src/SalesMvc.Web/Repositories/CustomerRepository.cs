@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -11,41 +10,50 @@ namespace SalesMvc.Web.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private DbSet<Customer> _dBset;
+        private readonly DbSet<Customer> _dBset;
         public CustomerRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
             _dBset = dbContext.Set<Customer>();
         }
 
-        public Task CreateAsync(Customer customer)
+        public async Task CreateAsync(Customer customer)
         {
-            throw new NotImplementedException();
+            await _dBset.AddAsync(customer);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var customer = await _dBset.FirstOrDefaultAsync( x => x.Id == id);
+            if (customer is null)
+                return;
+
+            _dBset.Remove(customer);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Customer>> GetAllCustomerById()
+        public async Task<List<Customer>> GetAllCustomer()
         {
-            throw new NotImplementedException();
+            return await _dBset.ToListAsync();
         }
 
-        public Task<Customer> GetCustomerAsync(int id)
+        public async Task<Customer> GetCustomerByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var customer = await _dBset.FirstOrDefaultAsync(x => x.Id == id);
+            return customer;
         }
 
-        public Task<Customer> Login(string email, string password)
+        public async Task<Customer> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            var result = await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
+            return result;
         }
 
-        public Task UpdateAsync(Customer customer)
-        {
-            throw new NotImplementedException();
+        public async Task UpdateAsync(Customer customer)
+        {         
+            _dBset.Update(customer);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
