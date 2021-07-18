@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
+using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Repositories
 {
@@ -33,7 +34,7 @@ namespace SalesMvc.Web.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Customer>> GetAllCustomer()
+        public async Task<IEnumerable<Customer>> GetAllCustomer()
         {
             return await _dBset.ToListAsync();
         }
