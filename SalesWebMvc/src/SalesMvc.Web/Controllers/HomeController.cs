@@ -94,8 +94,25 @@ namespace SalesMvc.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult RegisterCostumer()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RegisterCostumer([FromForm] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+
+                TempData["MSG_S"] = "Register with success!";
+
+                // TODO - Implement Diferent redirection
+                return RedirectToAction(nameof(RegisterCostumer));
+            }
             return View();
         }
 
