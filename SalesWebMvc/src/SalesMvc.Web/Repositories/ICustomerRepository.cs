@@ -10,7 +10,7 @@ namespace SalesMvc.Web.Repositories
         Task CreateAsync(Customer customer);
         Task UpdateAsync(Customer customer);
         Task DeleteAsync(int id);
-        Task<Customer> GetCustomerAsync(int id);
-        Task<List<Customer>> GetAllCustomerById();
+        Task<Customer> GetCustomerByIdAsync(int id);
+        Task<List<Customer>> GetAllCustomer();
     }
 }
