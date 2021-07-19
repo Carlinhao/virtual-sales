@@ -159,12 +159,12 @@
 </main>
 
 
-@using(Html.BeginForm(null, null, null, FormMethod.Post, false, new { @action = @Url.Action("Index", "home" + "#formulario")}))
+@using(Html.BeginForm(null, null, null, FormMethod.Post, false, new { @action = @Url.Action("Index", "Home") + "#formulario"}))
 {
 	<div class="container" id="formulario">
 		<div class="row">
-			<div class="col-sm-6 offset-sm-2">
-				@if (TempData["MSG_S"] != null)
+			<div class="col-sm-8 offset-sm-2">
+				@if(TempData["MSG_S"] != null)
 				{
 					<p class="alert alert-success">@TempData["MSG_S"]</p>
 				}
