@@ -1,21 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
 using SalesMvc.Web.Models;
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.Text;
-using SalesMvc.Web.DataBase;
+using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICustomerRepository _repository;
+        private readonly INewsLetterEmailRepository _newsLetterEmailRepository;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ICustomerRepository repository,
+                              INewsLetterEmailRepository newsLetterEmailRepository)
         {
-            _context = context;
+            _repository = repository;
+            _newsLetterEmailRepository = newsLetterEmailRepository;
         }
 
         [HttpGet]
@@ -25,12 +29,11 @@ namespace SalesMvc.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index([FromForm] NewsLetterEmail newsLetterEmail)
+        public async Task<IActionResult> Index([FromForm] NewsLetterEmail newsLetterEmail)
         {
             if(ModelState.IsValid)
             {
-                _context.NewsLetterEmails.Add(newsLetterEmail);
-                _context.SaveChanges();
+                await _newsLetterEmailRepository.RegisterEmail(newsLetterEmail);
 
                 TempData["MSG_S"] = "Send email with success!";
                 return RedirectToAction(nameof(Index));
@@ -101,12 +104,11 @@ namespace SalesMvc.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterCostumer([FromForm] Customer customer)
+        public async Task<IActionResult> RegisterCostumer([FromForm] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                _context.Customers.Add(customer);
-                _context.SaveChanges();
+               await _repository.CreateAsync(customer);
 
                 TempData["MSG_S"] = "Register with success!";
 
