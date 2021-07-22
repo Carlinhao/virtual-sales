@@ -27,6 +27,7 @@ namespace SalesMvc.Web
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("SQL_SERVER")));
+            services.AddMemoryCache();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
