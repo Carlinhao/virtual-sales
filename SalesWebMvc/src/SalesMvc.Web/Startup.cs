@@ -28,6 +28,10 @@ namespace SalesMvc.Web
             services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("SQL_SERVER")));
             services.AddMemoryCache();
+            services.AddSession(opt =>
+            {
+            });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,6 +51,7 @@ namespace SalesMvc.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
