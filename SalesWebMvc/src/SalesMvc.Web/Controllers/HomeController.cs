@@ -92,10 +92,25 @@ namespace SalesMvc.Web.Controllers
             return View("Contact");
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Login([FromForm] Customer customer)
+        {
+            if(customer.Email == "teste@teste.com" && customer.Password == "1234")
+            {
+                return new ContentResult() { Content = "Welcome!" };
+            }
+            else
+            {
+                return new ContentResult() { Content = "Failed!" };
+            }
+        }
+
 
         [HttpGet]
         public IActionResult RegisterCostumer()
