@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SalesMvc.Web.DataBase;
+using SalesMvc.Web.Libraries.Sessions;
 using SalesMvc.Web.Repositories;
 using SalesMvc.Web.Repositories.Interfaces;
 
@@ -21,6 +22,7 @@ namespace SalesMvc.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<ICustomerRepository, CustomerRepository>(); 
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
 
@@ -31,7 +33,7 @@ namespace SalesMvc.Web
             services.AddSession(opt =>
             {
             });
-
+            services.AddScoped<Session>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
