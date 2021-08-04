@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace SalesMvc.Web.Libraries.Sessions
 {
@@ -26,7 +25,7 @@ namespace SalesMvc.Web.Libraries.Sessions
             _context.HttpContext.Session.SetString(key, value);
         }
 
-        private bool Exist(string key)
+        public bool Exist(string key)
         {
             if (string.IsNullOrEmpty(_context.HttpContext.Session.GetString(key)))
             {
