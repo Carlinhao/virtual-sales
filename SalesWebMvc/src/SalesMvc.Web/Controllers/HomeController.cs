@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
+using SalesMvc.Web.Libraries.Login;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 
@@ -13,14 +14,17 @@ namespace SalesMvc.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICustomerRepository _repository;
+        private readonly ICustomerRepository _costumerRepository;
         private readonly INewsLetterEmailRepository _newsLetterEmailRepository;
+        private readonly LoginCostumer _loginCostumer;
 
         public HomeController(ICustomerRepository repository,
-                              INewsLetterEmailRepository newsLetterEmailRepository)
+                              INewsLetterEmailRepository newsLetterEmailRepository,
+                              LoginCostumer loginCostumer = null)
         {
-            _repository = repository;
+            _costumerRepository = repository;
             _newsLetterEmailRepository = newsLetterEmailRepository;
+            _loginCostumer = loginCostumer;
         }
 
         [HttpGet]
@@ -102,11 +106,11 @@ namespace SalesMvc.Web.Controllers
         [HttpGet]
         public IActionResult Painel()
         {
-            byte[] userID;
+            var result = _loginCostumer.GetCustomer();
 
-            if (HttpContext.Session.TryGetValue("ID", out userID))
+            if (result != null)
             {
-                return new ContentResult() { Content = "Welcome to painel!" + userID[0] };
+                return new ContentResult() { Content = "Welcome to painel!" + result.Name };
             }
             else
             {
@@ -115,19 +119,21 @@ namespace SalesMvc.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromForm] Customer customer)
+        public async Task<IActionResult> Login([FromForm] Customer customer)
         {
-            if (customer.Email == "teste@teste.com" && customer.Password == "1234")
-            {
-                HttpContext.Session.Set("ID", new byte[] { 52 });
-                HttpContext.Session.SetString("Email", customer.Email);
-                HttpContext.Session.SetInt32("Password", 1234);
+            var customerRepo = await _costumerRepository.Login(customer.Email, customer.Password);
 
-                return new ContentResult() { Content = "Welcome!" };
+            if (customerRepo != null)
+            {
+                _loginCostumer.PostCostumer(customerRepo);
+
+
+                return new RedirectResult(Url.Action(nameof(Painel)));
             }
             else
             {
-                return new ContentResult() { Content = "Failed!" };
+                ViewData["MSG_E"] = "User or Password invalid.";
+                return View();
             }
         }
 
@@ -143,7 +149,7 @@ namespace SalesMvc.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _repository.CreateAsync(customer);
+                await _costumerRepository.CreateAsync(customer);
 
                 TempData["MSG_S"] = "Register with success!";
 
