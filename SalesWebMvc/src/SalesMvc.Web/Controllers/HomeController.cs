@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
+using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Libraries.Login;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -104,18 +105,10 @@ namespace SalesMvc.Web.Controllers
         }
 
         [HttpGet]
+        [CostumerAutorization]
         public IActionResult Painel()
         {
-            var result = _loginCostumer.GetCustomer();
-
-            if (result != null)
-            {
-                return new ContentResult() { Content = "Welcome to painel!" + result.Name };
-            }
-            else
-            {
-                return new ContentResult() { Content = "Access Denied" };
-            }
+            return new ContentResult() { Content = "Welcome to painel!" };
         }
 
         [HttpPost]
