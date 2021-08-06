@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SalesMvc.Web.Models
+﻿namespace SalesMvc.Web.Models
 {
     public class Employer
     {
