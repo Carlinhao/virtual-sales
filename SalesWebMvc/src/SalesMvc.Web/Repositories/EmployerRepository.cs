@@ -25,9 +25,14 @@ namespace SalesMvc.Web.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var customer = await _dBset.FirstOrDefaultAsync(x => x.Id == id);
+            if (customer is null)
+                return;
+
+            _dBset.Remove(customer);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Employer>> GetAllEmployer()
