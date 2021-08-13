@@ -11,7 +11,6 @@ namespace SalesMvc.Web.Repositories
     public class EmployerRepository : IEmployerRepository
     {
         private readonly ApplicationDbContext _context;
-
         private readonly DbSet<Employer> _dBset;
 
         public EmployerRepository(ApplicationDbContext context)
@@ -30,9 +29,9 @@ namespace SalesMvc.Web.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Employer>> GetAllEmployer()
+        public async Task<IEnumerable<Employer>> GetAllEmployer()
         {
-            throw new NotImplementedException();
+            return await _dBset.ToListAsync();
         }
 
         public Task<Employer> GetEmployerByIdAsync(int id)
