@@ -12,5 +12,6 @@ namespace SalesMvc.Web.Repositories.Interfaces
 
         Task<Employer> GetEmployerByIdAsync(int id);
         Task<IEnumerable<Employer>> GetAllEmployer();
+        Task<Employer> Login(string email, string password);
     }
 }
