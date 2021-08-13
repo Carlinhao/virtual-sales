@@ -39,9 +39,10 @@ namespace SalesMvc.Web.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(Employer employer)
+        public async Task UpdateAsync(Employer employer)
         {
-            throw new NotImplementedException();
+            _dBset.Update(employer);
+            await _context.SaveChangesAsync();
         }
     }
 }
