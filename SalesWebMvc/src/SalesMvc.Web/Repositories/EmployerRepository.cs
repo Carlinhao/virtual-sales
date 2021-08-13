@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesMvc.Web.DataBase;
@@ -50,6 +51,12 @@ namespace SalesMvc.Web.Repositories
         {
             _dBset.Update(employer);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Employer> Login(string email, string password)
+        {
+            var result = await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
+            return result;
         }
     }
 }
