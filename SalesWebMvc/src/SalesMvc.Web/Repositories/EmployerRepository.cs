@@ -34,9 +34,10 @@ namespace SalesMvc.Web.Repositories
             return await _dBset.ToListAsync();
         }
 
-        public Task<Employer> GetEmployerByIdAsync(int id)
+        public async Task<Employer> GetEmployerByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var employer = await _dBset.FirstOrDefaultAsync(x => x.Id == id);
+            return employer;
         }
 
         public async Task UpdateAsync(Employer employer)
