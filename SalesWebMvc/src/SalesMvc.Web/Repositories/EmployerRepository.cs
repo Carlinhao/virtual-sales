@@ -10,18 +10,19 @@ namespace SalesMvc.Web.Repositories
 {
     public class EmployerRepository : IEmployerRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Employer> _dBset;
 
         public EmployerRepository(ApplicationDbContext context)
         {
-            _context = context;
-            _dBset = _context.Set<Employer>();
+            _dbContext = context;
+            _dBset = _dbContext.Set<Employer>();
         }
 
-        public Task CreateAsync(Employer employer)
+        public async Task CreateAsync(Employer employer)
         {
-            throw new NotImplementedException();
+            await _dBset.AddAsync(employer);
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task DeleteAsync(int id)
@@ -43,7 +44,7 @@ namespace SalesMvc.Web.Repositories
         public async Task UpdateAsync(Employer employer)
         {
             _dBset.Update(employer);
-            await _context.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
