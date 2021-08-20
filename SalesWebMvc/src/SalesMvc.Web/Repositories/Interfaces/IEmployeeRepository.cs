@@ -4,7 +4,7 @@ using SalesMvc.Web.Models;
 
 namespace SalesMvc.Web.Repositories.Interfaces
 {
-    public interface IEmployerRepository
+    public interface IEmployeeRepository
     {
         Task CreateAsync(Employees employer);
         Task UpdateAsync(Employees employer);
