@@ -12,15 +12,15 @@ namespace SalesMvc.Web.Repositories
     public class EmployerRepository : IEmployerRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly DbSet<Employer> _dBset;
+        private readonly DbSet<Employees> _dBset;
 
         public EmployerRepository(ApplicationDbContext context)
         {
             _dbContext = context;
-            _dBset = _dbContext.Set<Employer>();
+            _dBset = _dbContext.Set<Employees>();
         }
 
-        public async Task CreateAsync(Employer employer)
+        public async Task CreateAsync(Employees employer)
         {
             await _dBset.AddAsync(employer);
             await _dbContext.SaveChangesAsync();
@@ -36,24 +36,24 @@ namespace SalesMvc.Web.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Employer>> GetAllEmployer()
+        public async Task<IEnumerable<Employees>> GetAllEmployer()
         {
             return await _dBset.ToListAsync();
         }
 
-        public async Task<Employer> GetEmployerByIdAsync(int id)
+        public async Task<Employees> GetEmployerByIdAsync(int id)
         {
             var employer = await _dBset.FirstOrDefaultAsync(x => x.Id == id);
             return employer;
         }
 
-        public async Task UpdateAsync(Employer employer)
+        public async Task UpdateAsync(Employees employer)
         {
             _dBset.Update(employer);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Employer> Login(string email, string password)
+        public async Task<Employees> Login(string email, string password)
         {
             var result = await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
             return result;

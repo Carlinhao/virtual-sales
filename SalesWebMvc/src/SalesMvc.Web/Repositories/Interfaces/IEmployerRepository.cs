@@ -6,12 +6,12 @@ namespace SalesMvc.Web.Repositories.Interfaces
 {
     public interface IEmployerRepository
     {
-        Task CreateAsync(Employer employer);
-        Task UpdateAsync(Employer employer);
+        Task CreateAsync(Employees employer);
+        Task UpdateAsync(Employees employer);
         Task DeleteAsync(int id);
 
-        Task<Employer> GetEmployerByIdAsync(int id);
-        Task<IEnumerable<Employer>> GetAllEmployer();
-        Task<Employer> Login(string email, string password);
+        Task<Employees> GetEmployerByIdAsync(int id);
+        Task<IEnumerable<Employees>> GetAllEmployer();
+        Task<Employees> Login(string email, string password);
     }
 }
