@@ -9,12 +9,12 @@ using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Repositories
 {
-    public class EmployerRepository : IEmployerRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Employees> _dBset;
 
-        public EmployerRepository(ApplicationDbContext context)
+        public EmployeeRepository(ApplicationDbContext context)
         {
             _dbContext = context;
             _dBset = _dbContext.Set<Employees>();
