@@ -24,12 +24,12 @@ namespace SalesMvc.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddScoped<ICustomerRepository, CustomerRepository>(); 
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             services.AddControllersWithViews();
-            services.AddDbContext<ApplicationDbContext>(options => 
+            services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SQL_SERVER")));
             services.AddMemoryCache();
             services.AddSession(opt =>
@@ -60,6 +60,10 @@ namespace SalesMvc.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
