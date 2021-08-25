@@ -8,5 +8,10 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         {
             return View();
         }
+
+        public IActionResult RecoverPassword()
+        {
+            return View();
+        }
     }
 }
