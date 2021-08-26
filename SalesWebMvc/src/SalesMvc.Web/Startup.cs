@@ -37,6 +37,7 @@ namespace SalesMvc.Web
             });
             services.AddScoped<Session>();
             services.AddScoped<LoginCostumer>();
+            services.AddScoped<LoginEmployee>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

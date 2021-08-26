@@ -7,7 +7,7 @@ namespace SalesMvc.Web.DataBase
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<NewsLetterEmail> NewsLetterEmails { get; set; }
-        public DbSet<Employees> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
             : base(options)
