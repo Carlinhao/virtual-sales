@@ -14,18 +14,18 @@ namespace SalesMvc.Web.Libraries.Login
             _sesseion = sesseion;
         }
 
-        public void PostCostumer(Customer costumer)
+        public void PostEmplyee(Employee costumer)
         {
             var value = JsonSerializer.Serialize(costumer);
 
             _sesseion.Create(_key, value);
         }
 
-        public Customer GetCustomer()
+        public Employee GetEmplyee()
         {
             if (_sesseion.Exist(_key))
             {
-                return JsonSerializer.Deserialize<Customer>(_sesseion.Search(_key));
+                return JsonSerializer.Deserialize<Employee>(_sesseion.Search(_key));
             }
             return null;
         }
