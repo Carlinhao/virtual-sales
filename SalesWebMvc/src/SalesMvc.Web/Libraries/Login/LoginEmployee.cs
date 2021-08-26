@@ -14,9 +14,9 @@ namespace SalesMvc.Web.Libraries.Login
             _sesseion = sesseion;
         }
 
-        public void PostEmplyee(Employee costumer)
+        public void PostEmplyee(Employee emplyee)
         {
-            var value = JsonSerializer.Serialize(costumer);
+            var value = JsonSerializer.Serialize(emplyee);
 
             _sesseion.Create(_key, value);
         }
