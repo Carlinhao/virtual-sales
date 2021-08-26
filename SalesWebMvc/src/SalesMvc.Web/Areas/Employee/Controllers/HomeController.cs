@@ -2,6 +2,7 @@
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
+    [Area("Employee")]
     public class HomeController : Controller
     {
         public IActionResult Login()
