@@ -25,7 +25,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 
         public IActionResult Painel()
         {
-            return new ContentResult() { Content = "Welcome to painel!" };
+            return View();
         }
 
         [HttpPost]
