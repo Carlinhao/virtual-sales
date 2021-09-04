@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Libraries.Login;
 using SalesMvc.Web.Repositories.Interfaces;
 
@@ -23,6 +24,13 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             return View();
         }
 
+        [EmployerAuthorization]
+        public IActionResult Logout()
+        {
+            return View();
+        }
+
+        [EmployerAuthorization]
         public IActionResult Painel()
         {
             return View();
