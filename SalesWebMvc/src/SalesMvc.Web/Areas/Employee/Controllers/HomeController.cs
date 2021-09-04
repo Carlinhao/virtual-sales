@@ -27,7 +27,9 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [EmployerAuthorization]
         public IActionResult Logout()
         {
-            return View();
+            _loginEmployee.Logout();
+
+            return RedirectToAction("Login", "Home");
         }
 
         [EmployerAuthorization]
