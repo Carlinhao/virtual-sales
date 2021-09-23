@@ -24,14 +24,18 @@ namespace SalesMvc.Web.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var category = await _dbset.FindAsync(id);
+            if (category == null)
+                return;
+            _dbset.Remove(category);
+            await _context.SaveChangesAsync(); 
         }
 
-        public Task<IEnumerable<Category>> GetAllCategory()
+        public async Task<IEnumerable<Category>> GetAllCategory()
         {
-            throw new System.NotImplementedException();
+            return await _dbset.ToListAsync();
         }
 
         public Task UpdateAsync(Category category)
