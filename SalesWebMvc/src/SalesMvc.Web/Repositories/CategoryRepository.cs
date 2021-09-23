@@ -18,9 +18,10 @@ namespace SalesMvc.Web.Repositories
             _dbset = _context.Set<Category>();
         }
 
-        public Task CreateAsync(Category category)
+        public async Task CreateAsync(Category category)
         {
-            throw new System.NotImplementedException();
+            await _dbset.AddAsync(category);
+            await _context.SaveChangesAsync();
         }
 
         public Task DeleteAsync(int id)
