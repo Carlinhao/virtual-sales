@@ -27,6 +27,7 @@ namespace SalesMvc.Web
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
