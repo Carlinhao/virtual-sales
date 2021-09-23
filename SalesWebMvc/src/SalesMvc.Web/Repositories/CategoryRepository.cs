@@ -38,9 +38,16 @@ namespace SalesMvc.Web.Repositories
             return await _dbset.ToListAsync();
         }
 
-        public Task UpdateAsync(Category category)
+        public async Task<Category> GetByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var customer = await _dbset.FirstOrDefaultAsync(x => x.Id == id);
+            return customer;
+        }
+
+        public async Task UpdateAsync(Category category)
+        {
+            _dbset.Update(category);
+            await _context.SaveChangesAsync();
         }
     }
 }
