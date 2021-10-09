@@ -1,13 +1,22 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Models;
+using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
     public class CategoryController : Controller
     {
-        public IActionResult Index()
+        private readonly ICategoryRepository _repository;
+
+        public CategoryController(ICategoryRepository repository)
         {
-            return View();
+            _repository = repository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _repository.GetAllCategory());
         }
 
         [HttpGet]
@@ -18,6 +27,24 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         
         [HttpPost]
         public IActionResult Create([FromForm] Category category)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Update()
+        {
+            return View();
+        }
+        
+        [HttpPut]
+        public IActionResult Update([FromForm] Category category)
+        {
+            return View();
+        }
+        
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
             return View();
         }
