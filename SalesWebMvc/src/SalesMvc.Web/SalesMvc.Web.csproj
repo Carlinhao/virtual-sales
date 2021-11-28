@@ -19,6 +19,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Message.resx</DependentUpon>
     </Compile>
+    <Compile Remove="Areas\Employee\Pages\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Message.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Remove="Areas\Employee\Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Areas\Employee\Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Employee\Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Employee\Pages\Category\Index.cshtml" />
   </ItemGroup>
 
 </Project>
