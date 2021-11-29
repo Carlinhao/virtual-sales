@@ -10,4 +10,4 @@
 	@item.Name<br />
 }
 
-@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page }) )
+@Html.PagedListPager( (IPagedList)Model, page => Url.Action("Index", new { page }) )
