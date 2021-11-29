@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
+using X.PagedList;
 
 namespace SalesMvc.Web.Repositories
 {
@@ -33,9 +34,9 @@ namespace SalesMvc.Web.Repositories
             await _context.SaveChangesAsync(); 
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategory()
+        public async Task<IPagedList<Category>> GetAllCategory(int? page)
         {
-            return await _dbset.ToListAsync();
+            return await _dbset.ToPagedListAsync(page, 10);            
         }
 
         public async Task<Category> GetByIdAsync(int id)
