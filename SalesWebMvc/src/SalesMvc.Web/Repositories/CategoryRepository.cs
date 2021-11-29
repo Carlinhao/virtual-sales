@@ -36,7 +36,8 @@ namespace SalesMvc.Web.Repositories
 
         public async Task<IPagedList<Category>> GetAllCategory(int? page)
         {
-            return await _dbset.ToPagedListAsync(page, 10);            
+            var result = await _dbset.ToPagedListAsync(page ?? 1, 10);
+            return result;
         }
 
         public async Task<Category> GetByIdAsync(int id)
