@@ -17,9 +17,9 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             _repository = repository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _repository.GetAllCategory());
+            return View(await _repository.GetAllCategory(page));
         }
 
         [HttpGet]
