@@ -1,6 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Query;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -36,7 +42,7 @@ namespace SalesMvc.Web.Repositories
 
         public async Task<IPagedList<Category>> GetAllCategory(int? page)
         {
-            var result = await _dbset.ToPagedListAsync(page ?? 1, 10);
+            var result = await _dbset.Include(a => a.CategoryFather).ToPagedListAsync(page ?? 1, 10);
             return result;
         }
 
