@@ -35,7 +35,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
             return View();
         }
