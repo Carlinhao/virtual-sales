@@ -31,6 +31,14 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Create([FromForm] Category category)
         {
+            if (ModelState.IsValid)
+            {
+                _repository.CreateAsync(category);
+
+                TempData["MSG_S"] = "Register save succsess";
+
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
