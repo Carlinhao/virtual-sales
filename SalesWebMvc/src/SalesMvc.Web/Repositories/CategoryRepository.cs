@@ -1,12 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.EntityFrameworkCore.Query;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -38,6 +32,11 @@ namespace SalesMvc.Web.Repositories
                 return;
             _dbset.Remove(category);
             await _context.SaveChangesAsync(); 
+        }
+
+        public async Task<IEnumerable<Category>> GetAllCategories()
+        {
+            return await _dbset.ToListAsync();
         }
 
         public async Task<IPagedList<Category>> GetAllCategory(int? page)
