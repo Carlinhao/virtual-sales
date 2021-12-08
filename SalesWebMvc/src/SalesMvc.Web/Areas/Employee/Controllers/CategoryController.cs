@@ -1,6 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SalesMvc.Web.Libraries.Filters;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 
@@ -23,22 +24,29 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var result = await _repository.GetAllCategories();
+            ViewBag.Categories = result.ToList().Select(a => new SelectListItem(a.Name,
+                                                                                a.Id.ToString()));
+
             return View();
         }
         
         [HttpPost]
-        public IActionResult Create([FromForm] Category category)
+        public async Task<IActionResult> Create([FromForm] Category category)
         {
             if (ModelState.IsValid)
             {
-                _repository.CreateAsync(category);
+                await _repository.CreateAsync(category);
 
                 TempData["MSG_S"] = "Register save succsess";
 
                 return RedirectToAction(nameof(Index));
             }
+            var result = await _repository.GetAllCategories();
+            ViewBag.Categories = result.ToList().Select(a => new SelectListItem(a.Name,
+                                                                                a.Id.ToString()));
             return View();
         }
 
