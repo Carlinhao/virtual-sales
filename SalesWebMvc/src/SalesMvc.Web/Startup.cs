@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SalesMvc.Web.DataBase;
+using SalesMvc.Web.IOC;
 using SalesMvc.Web.Libraries.Login;
 using SalesMvc.Web.Libraries.Sessions;
 using SalesMvc.Web.Repositories;
@@ -24,21 +25,13 @@ namespace SalesMvc.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            ServicesConfiguration.GetServicesConfig(services);
 
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SQL_SERVER")));
-            services.AddMemoryCache();
-            services.AddSession(opt =>
-            {
-            });
-            services.AddScoped<Session>();
-            services.AddScoped<LoginCostumer>();
-            services.AddScoped<LoginEmployee>();
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

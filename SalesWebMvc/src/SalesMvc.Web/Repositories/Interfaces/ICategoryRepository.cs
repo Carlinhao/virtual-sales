@@ -11,6 +11,7 @@ namespace SalesMvc.Web.Repositories.Interfaces
         Task UpdateAsync(Category category);
         Task DeleteAsync(int id);
         Task<Category> GetByIdAsync(int id);
+        Task<IEnumerable<Category>> GetAllCategories();
         Task<IPagedList<Category>> GetAllCategory(int? page);
     }
 }
