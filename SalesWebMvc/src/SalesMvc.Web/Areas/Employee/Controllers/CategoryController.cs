@@ -77,7 +77,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             return View();
         }
         
-        [HttpDelete]
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             _repository.DeleteAsync(id);
