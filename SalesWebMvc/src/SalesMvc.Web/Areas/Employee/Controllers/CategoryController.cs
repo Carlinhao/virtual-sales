@@ -40,7 +40,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             {
                 await _repository.CreateAsync(category);
 
-                TempData["MSG_S"] = "Register save succsess";
+                TempData["MSG_S"] = "Register save succsess.";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -51,21 +51,39 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
-            return View();
+            var category = await _repository.GetByIdAsync(id);
+
+            var result = await _repository.GetAllCategories();
+            ViewBag.Categories = result.ToList().Where(c => c.Id != id).Select(a => new SelectListItem(a.Name,
+                                                                                a.Id.ToString()));
+            return View(category);
         }
         
         [HttpPut]
-        public IActionResult Update([FromForm] Category category)
+        public async Task<IActionResult> Update([FromForm] Category category, int id)
         {
+            if (ModelState.IsValid)
+            {
+                await _repository.UpdateAsync(category);
+                TempData["MSG_S"] = "Register save succsess.";
+
+                return RedirectToAction(nameof(Index));
+            }
+            var result = await _repository.GetAllCategories();
+            ViewBag.Categories = result.ToList().Where(c => c.Id != id).Select(a => new SelectListItem(a.Name,
+                                                                                a.Id.ToString()));
             return View();
         }
         
-        [HttpDelete]
+        [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View();
+            _repository.DeleteAsync(id);
+            TempData["MSG_S"] = "Successfully deleted.";
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
