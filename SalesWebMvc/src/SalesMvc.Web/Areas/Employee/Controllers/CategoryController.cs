@@ -40,7 +40,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             {
                 await _repository.CreateAsync(category);
 
-                TempData["MSG_S"] = "Register save succsess";
+                TempData["MSG_S"] = "Register save succsess.";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -67,7 +67,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             if (ModelState.IsValid)
             {
                 await _repository.UpdateAsync(category);
-                TempData["MSG_S"] = "Register save succsess";
+                TempData["MSG_S"] = "Register save succsess.";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -80,7 +80,10 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            return View();
+            _repository.DeleteAsync(id);
+            TempData["MSG_S"] = "Successfully deleted.";
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
