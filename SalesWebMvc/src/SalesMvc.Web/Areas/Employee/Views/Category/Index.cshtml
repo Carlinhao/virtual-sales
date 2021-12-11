@@ -32,9 +32,9 @@
 					<th scope="row">@category.Id</th>
 					<td>@category.Name</td>
 					<td>
-						@Html.DisplayFor(model => category.CategoryFatherId)
+						@Html.DisplayFor(model => category.CategoryFather.Id)
 						-
-						@Html.DisplayFor(model => category.CategoryFather)
+						@Html.DisplayFor(model => category.CategoryFather.Name)
 					</td>
 					<td>
 						<a asp-action="Update" asp-route-id="@category.Id" class="btn btn-secondary">Update</a>
