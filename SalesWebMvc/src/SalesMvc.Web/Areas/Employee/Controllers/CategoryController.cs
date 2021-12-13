@@ -2,13 +2,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
     [Area("Employee")]
-    //[CostumerAutorization]
+    [CostumerAutorization]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _repository;
