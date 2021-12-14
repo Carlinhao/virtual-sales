@@ -23,7 +23,7 @@ namespace SalesMvc.Web.Libraries.Filters
 
             if (result == null)
             {
-                context.Result = new ContentResult() { Content = "Access Denied" };
+                context.Result = new RedirectToActionResult("Login", "Home", null);
             }
         }
     }
