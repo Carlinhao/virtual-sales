@@ -15,7 +15,7 @@ namespace SalesMvc.Web.Repositories
         public CustomerRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _dBset = dbContext.Set<Customer>();
+            _dBset = _dbContext.Set<Customer>();
         }
 
         public async Task CreateAsync(Customer customer)
