@@ -27,9 +27,10 @@ namespace SalesMvc.Web.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var category = await _dbset.FindAsync(id);
+            var category = await _dbset.FirstOrDefaultAsync(a => a.Id == id);
             if (category == null)
                 return;
+
             _dbset.Remove(category);
             await _context.SaveChangesAsync(); 
         }
