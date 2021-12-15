@@ -16,6 +16,8 @@ namespace SalesMvc.Web.Models
         [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E001")]
         [MinLength(4, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E002")]
         public string Slug {  get; set; }
+
+        [Display(Name ="Category Father")]
         public int? CategoryFatherId { get; set; }
 
         [ForeignKey("CategoryFatherId")]
