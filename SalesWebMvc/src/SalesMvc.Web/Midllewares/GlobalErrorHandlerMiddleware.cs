@@ -1,20 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-using System;
 using Newtonsoft.Json;
-using System.Net;
 
 namespace SalesMvc.Web.Midllewares
 {
     public class GlobalErrorHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<RequestDelegate> _logger;
+        private readonly ILogger<GlobalErrorHandlerMiddleware> _logger;
 
         public GlobalErrorHandlerMiddleware(RequestDelegate next,
-                                            ILogger<RequestDelegate> logger)
+                                            ILogger<GlobalErrorHandlerMiddleware> logger)
         {
             _next = next;
             _logger = logger;
@@ -22,15 +21,14 @@ namespace SalesMvc.Web.Midllewares
 
         public async Task InvokAsync(HttpContext context)
         {
-            if (context == null)
-                return;
+            _logger.Log(LogLevel.Information, "GlobalErrorHandler", context);
+
             try
             {
                 await _next(context);
             }
             catch (Exception error)
             {
-                var response = context.Response;
                 await HandleExceptionAsync(context, error);
             }
         }
