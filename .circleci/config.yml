@@ -11,4 +11,4 @@ jobs:
       - checkout
       - run:
           name: "Build projects"
-          command: dotnet build SalesWebMvc.sln
+          command: dotnet build SalesWebMvc/SalesWebMvc.sln
