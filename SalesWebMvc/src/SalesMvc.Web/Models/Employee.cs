@@ -9,13 +9,13 @@ namespace SalesMvc.Web.Models
         [Display(Name = "Código")]
         public int Id { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Message), ErrorMessage = "MSG_E001")]
-        [MinLength(4, ErrorMessageResourceType = typeof(Message), ErrorMessage = "MSG_E002")]
+        [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E001")]
+        [MinLength(4, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E002")]
         public string Name { get; set; }
 
         [Display(Name = "E-mail")]
-        [Required(ErrorMessageResourceType = typeof(Message), ErrorMessage = "MSG_E001")]
-        [EmailAddress(ErrorMessageResourceType = typeof(Message), ErrorMessage = "MSG_E004")]
+        [Required(ErrorMessage = null, ErrorMessageResourceName = "MSG_E001", ErrorMessageResourceType = typeof(Message))]
+        [EmailAddress(ErrorMessage = null, ErrorMessageResourceName = "MSG_E004", ErrorMessageResourceType = typeof(Message))]
         public string Email { get; set; }
 
         [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E001")]
@@ -23,6 +23,8 @@ namespace SalesMvc.Web.Models
         public string Password { get; set; }
 
         [NotMapped]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = null, ErrorMessageResourceName = "MSG_E005", ErrorMessageResourceType = typeof(Message))]
         public string ConfirmationPassword { get; set; }
 
         [Required]
