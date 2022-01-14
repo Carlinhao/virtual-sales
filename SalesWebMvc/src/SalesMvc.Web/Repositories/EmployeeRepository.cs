@@ -5,6 +5,7 @@ using SalesMvc.Web.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SalesMvc.Web.Repositories
 {
@@ -55,6 +56,13 @@ namespace SalesMvc.Web.Repositories
         public async Task<Employee> Login(string email, string password)
         {
             var result = await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
+            return result;
+        }
+
+        public async Task<IPagedList<Employee>> GetAllEmployer(int? page)
+        {
+            var result = await _dBset.ToPagedListAsync(page ?? 1, 10);
+
             return result;
         }
     }
