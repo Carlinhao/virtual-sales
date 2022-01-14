@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -12,11 +13,14 @@ namespace SalesMvc.Web.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Category> _dbset;
+        private readonly IConfiguration _configuration;
 
-        public CategoryRepository(ApplicationDbContext context)
+        public CategoryRepository(ApplicationDbContext context,
+                                  IConfiguration configuration)
         {
             _context = context;
             _dbset = _context.Set<Category>();
+            _configuration = configuration;
         }
 
         public async Task CreateAsync(Category category)
@@ -42,7 +46,7 @@ namespace SalesMvc.Web.Repositories
 
         public async Task<IPagedList<Category>> GetAllCategory(int? page)
         {
-            var result = await _dbset.Include(a => a.CategoryFather).ToPagedListAsync(page ?? 1, 10);
+            var result = await _dbset.Include(a => a.CategoryFather).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
             return result;
         }
 
