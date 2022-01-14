@@ -1,0 +1,51 @@
+﻿@model IPagedList<Employee>
+@{
+	ViewData["Title"] = "Employee";
+}
+
+<h1>Employee</h1>
+
+<a asp-action="Create" class="btn btn-primary">Register</a>
+<br />
+<br />
+
+@if (TempData["MSG_S"] != null)
+{
+	<p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+
+{
+	<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
+				<th scope="col">@Html.DisplayNameFor(model => model.First().Name)</th>
+				<th scope="col">@Html.DisplayNameFor(model => model.First().Email)</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var employee in Model)
+			{
+				<tr>
+					<th scope="row">@employee.Id</th>
+					<td>@employee.Name</td>
+					<td>@employee.Email </td>
+					<td>
+						<a asp-action="Update" asp-route-id="@employee.Id" class="btn btn-secondary">Update</a>
+						<a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+	@Html.PagedListPager( (IPagedList)Model, page => Url.Action("Index", new { page }) )
+}
+else
+{
+	<span>Register not found</span>
+}
