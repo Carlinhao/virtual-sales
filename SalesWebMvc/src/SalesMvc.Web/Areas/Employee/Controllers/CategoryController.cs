@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesMvc.Web.Libraries.Filters;
+using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 
@@ -41,7 +42,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             {
                 await _repository.CreateAsync(category);
 
-                TempData["MSG_S"] = "Register save succsess.";
+                TempData["MSG_S"] = Message.MSG_S001;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -68,7 +69,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             if (ModelState.IsValid)
             {
                 await _repository.UpdateAsync(category);
-                TempData["MSG_S"] = "Register save succsess.";
+                TempData["MSG_S"] = Message.MSG_S001;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -82,7 +83,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _repository.DeleteAsync(id);
-            TempData["MSG_S"] = "Successfully deleted.";
+            TempData["MSG_S"] = Message.MSG_S002;
 
             return RedirectToAction(nameof(Index));
         }

@@ -129,4 +129,13 @@
   <data name="MSG_E004" xml:space="preserve">
     <value>Field {0} is invalid.</value>
   </data>
+  <data name="MSG_E005" xml:space="preserve">
+    <value>The value field {0} isn't equal with value {1}.</value>
+  </data>
+  <data name="MSG_S001" xml:space="preserve">
+    <value>Register save succsess.</value>
+  </data>
+  <data name="MSG_S002" xml:space="preserve">
+    <value>Successfully deleted.</value>
+  </data>
 </root>
