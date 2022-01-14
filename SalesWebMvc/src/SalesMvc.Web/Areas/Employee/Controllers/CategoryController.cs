@@ -62,7 +62,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             return View(category);
         }
         
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Update([FromForm] Category category, int id)
         {
             if (ModelState.IsValid)
@@ -79,9 +79,9 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
         
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(id);
             TempData["MSG_S"] = "Successfully deleted.";
 
             return RedirectToAction(nameof(Index));
