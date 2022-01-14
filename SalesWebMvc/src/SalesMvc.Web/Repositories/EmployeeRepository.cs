@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -13,11 +14,14 @@ namespace SalesMvc.Web.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Employee> _dBset;
+        private readonly IConfiguration _configuration;
 
-        public EmployeeRepository(ApplicationDbContext context)
+        public EmployeeRepository(ApplicationDbContext context,
+                                  IConfiguration configuration)
         {
             _dbContext = context;
             _dBset = _dbContext.Set<Employee>();
+            _configuration = configuration;
         }
 
         public async Task CreateAsync(Employee employer)
@@ -61,7 +65,7 @@ namespace SalesMvc.Web.Repositories
 
         public async Task<IPagedList<Employee>> GetAllEmployer(int? page)
         {
-            var result = await _dBset.ToPagedListAsync(page ?? 1, 10);
+            var result = await _dBset.ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
             return result;
         }
