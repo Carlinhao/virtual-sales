@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SalesMvc.Web.Models;
+using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
+    [Area("Employee")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -20,10 +21,9 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var result = await _employeeRepository.GetAllEmployer();
-            return View(result);
+            return View();
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 {
                 await _employeeRepository.CreateAsync(employee);
 
-                TempData["MSG_S"] = "Register save succsess.";
+                TempData["MSG_S"] = Message.MSG_S001;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -54,7 +54,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             if (ModelState.IsValid)
             {
                 await _employeeRepository.UpdateAsync(employee);
-                TempData["MSG_S"] = "Register save succsess.";
+                TempData["MSG_S"] = Message.MSG_S001;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -66,6 +66,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _employeeRepository.DeleteAsync(id);
+            TempData["MSG_S"] = Message.MSG_S002;
             return View();
         }
     }
