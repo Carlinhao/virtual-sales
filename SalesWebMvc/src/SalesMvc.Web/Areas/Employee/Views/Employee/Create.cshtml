@@ -7,30 +7,5 @@
 <h1>Register Employee</h1>
 
 <form method="post">
-  <div class="form-group">
-    <label asp-for="Name"></label>
-    <input asp-for="Name" class="form-control" placeholder="Insert employee name." >
-    <span asp-validation-for="Name" class="text-danger" ></span>
-  </div>
-  <div class="form-group">
-    <label asp-for="Email"></label>
-    <input asp-for="Email" class="form-control" placeholder="Insert e-mail." >
-    <span asp-validation-for="Email" class="text-danger" ></span>
-  </div>
-  <div class="form-group">
-    <label asp-for="Password"></label>
-    <input asp-for="Password" class="form-control" type="password" placeholder="Insert password." >
-    <span asp-validation-for="Password" class="text-danger" ></span>
-  </div>
-  <div class="form-group">
-    <label asp-for="ConfirmationPassword"></label>
-    <input asp-for="ConfirmationPassword" class="form-control" type="password" placeholder="Confirm Passaword." >
-    <span asp-validation-for="ConfirmationPassword" class="text-danger" ></span>
-  </div>
-  <div class="form-group">
-    <label asp-for="Type"></label>
-    <input asp-for="Type" class="form-control" placeholder="Insert type name." >
-    <span asp-validation-for="Type" class="text-danger" ></span>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+   <partial name="_EmployeeView" />
 </form>
