@@ -67,7 +67,8 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         {
             await _employeeRepository.DeleteAsync(id);
             TempData["MSG_S"] = Message.MSG_S002;
-            return View();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
