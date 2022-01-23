@@ -17,7 +17,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 
         public async Task<IActionResult> Index(int? page)
         {
-            return View( await _employeeRepository.GetAllEmployer(page));
+            return View(await _employeeRepository.GetAllEmployer(page));
         }
 
         [HttpGet]
@@ -29,15 +29,23 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] Models.Employee employee)
         {
-            if(ModelState.IsValid)
-{
+            if (ModelState.IsValid)
+            {
+                // TODO Generate password.
                 await _employeeRepository.CreateAsync(employee);
 
                 TempData["MSG_S"] = Message.MSG_S001;
-
+                //  send e-mail
                 return RedirectToAction(nameof(Index));
             }
 
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GeneratePassword()
+        {
+            // TODO Generate password, salve new password, sen
             return View();
         }
 
