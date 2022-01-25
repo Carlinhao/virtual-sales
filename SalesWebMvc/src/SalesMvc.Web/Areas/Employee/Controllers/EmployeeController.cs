@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Lang;
+using SalesMvc.Web.Libraries.Text;
 using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
@@ -43,9 +44,14 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GeneratePassword()
+        public async Task<IActionResult> GeneratePassword(int id)
         {
-            // TODO Generate password, salve new password, sen
+            // TODO send email
+            var employee = await _employeeRepository.GetEmployerByIdAsync(id);
+
+            employee.Password = KeyGenerator.GetUniqueKey(8);
+            await _employeeRepository.UpdateAsync(employee);
+
             return View();
         }
 
