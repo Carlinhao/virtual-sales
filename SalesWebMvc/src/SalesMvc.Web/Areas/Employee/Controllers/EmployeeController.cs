@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Lang;
+using SalesMvc.Web.Libraries.Text;
 using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
@@ -17,7 +18,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 
         public async Task<IActionResult> Index(int? page)
         {
-            return View( await _employeeRepository.GetAllEmployer(page));
+            return View(await _employeeRepository.GetAllEmployer(page));
         }
 
         [HttpGet]
@@ -29,14 +30,27 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] Models.Employee employee)
         {
-            if(ModelState.IsValid)
-{
+            if (ModelState.IsValid)
+            {
+                // TODO Generate password.
                 await _employeeRepository.CreateAsync(employee);
 
                 TempData["MSG_S"] = Message.MSG_S001;
-
+                //  send e-mail
                 return RedirectToAction(nameof(Index));
             }
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GeneratePassword(int id)
+        {
+            // TODO send email
+            var employee = await _employeeRepository.GetEmployerByIdAsync(id);
+
+            employee.Password = KeyGenerator.GetUniqueKey(8);
+            await _employeeRepository.UpdateAsync(employee);
 
             return View();
         }
@@ -67,7 +81,8 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         {
             await _employeeRepository.DeleteAsync(id);
             TempData["MSG_S"] = Message.MSG_S002;
-            return View();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
