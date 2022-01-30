@@ -3,12 +3,15 @@ using SalesMvc.Web.Libraries.Login;
 using SalesMvc.Web.Libraries.Sessions;
 using SalesMvc.Web.Repositories.Interfaces;
 using SalesMvc.Web.Repositories;
+using System.Net.Mail;
+using System.Net;
+using Microsoft.Extensions.Configuration;
 
 namespace SalesMvc.Web.IOC
 {
     public static class ServicesConfiguration
     {
-        public static IServiceCollection GetServicesConfig(this IServiceCollection services)
+        public static IServiceCollection GetServicesConfig(this IServiceCollection services, IConfiguration configuration)
         {
             // Repositories
             services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -24,6 +27,23 @@ namespace SalesMvc.Web.IOC
             services.AddScoped<Session>();
             services.AddScoped<LoginCostumer>();
             services.AddScoped<LoginEmployee>();
+
+            // SMTP
+            services.AddScoped(options =>
+            {
+                SmtpClient smtpClient = new SmtpClient()
+                {
+                    Host = configuration.GetValue<string>("ServerSMTP"),
+                    Port = configuration.GetValue<int>("ServerPort"),
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(configuration.GetValue<string>("UserName"),
+                                                        configuration.GetValue<string>("Password")),
+                    EnableSsl = true
+                };
+
+                return smtpClient;
+            });
+           
 
             return services;
         }

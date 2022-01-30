@@ -22,7 +22,7 @@ namespace SalesMvc.Web
         {
             services.AddHttpContextAccessor();
 
-            ServicesConfiguration.GetServicesConfig(services);
+            ServicesConfiguration.GetServicesConfig(services, Configuration);
 
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(options =>
