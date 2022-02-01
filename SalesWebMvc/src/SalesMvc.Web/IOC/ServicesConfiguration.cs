@@ -6,6 +6,7 @@ using SalesMvc.Web.Repositories;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Configuration;
+using SalesMvc.Web.Libraries.Email;
 
 namespace SalesMvc.Web.IOC
 {
@@ -43,6 +44,8 @@ namespace SalesMvc.Web.IOC
 
                 return smtpClient;
             });
+            services.AddScoped<ContactEmail>();
+            
            
 
             return services;

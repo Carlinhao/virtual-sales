@@ -18,14 +18,17 @@ namespace SalesMvc.Web.Controllers
         private readonly ICustomerRepository _costumerRepository;
         private readonly INewsLetterEmailRepository _newsLetterEmailRepository;
         private readonly LoginCostumer _loginCostumer;
+        private readonly ContactEmail _contactEmail;
 
         public HomeController(ICustomerRepository repository,
                               INewsLetterEmailRepository newsLetterEmailRepository,
-                              LoginCostumer loginCostumer = null)
+                              LoginCostumer loginCostumer,
+                              ContactEmail contactEmail)
         {
             _costumerRepository = repository;
             _newsLetterEmailRepository = newsLetterEmailRepository;
             _loginCostumer = loginCostumer;
+            _contactEmail = contactEmail;
         }
 
         [HttpGet]
@@ -72,7 +75,7 @@ namespace SalesMvc.Web.Controllers
 
                 if (isValid)
                 {
-                    ContactEmail.SendContactEmail(contact);
+                    _contactEmail.SendContactEmail(contact);
                     ViewData["MSG_S"] = "Send message success!";
                 }
                 else
