@@ -1,23 +1,22 @@
-﻿using System.Net;
-using System.Net.Mail;
+﻿using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.Models;
 
 namespace SalesMvc.Web.Libraries.Email
 {
     public class ContactEmail
     {
-        public static void SendContactEmail(Contact contact)
+        private readonly SmtpClient _smtpClient;
+        private readonly IConfiguration _configuration;
+        public ContactEmail(SmtpClient smtpClient,
+                            IConfiguration configuration)
         {
-            /*
-             * Server tha send email 
-             */
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential("","");
-            smtpClient.EnableSsl = true;
+            _smtpClient = smtpClient;
+            _configuration = configuration;
+        }
 
-
-
+        public void SendContactEmail(Contact contact)
+        {
             /*
              * Body message
              */
@@ -25,13 +24,13 @@ namespace SalesMvc.Web.Libraries.Email
             string bodyMessage = string.Format($"<h2> Virtual Sale </h2> <br/> {contact.Name} <br/> {contact.Email} <br/> {contact.Text}");
 
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("");
+            mailMessage.From = new MailAddress(_configuration.GetValue<string>("Email:UserName"));
             mailMessage.To.Add("");
             mailMessage.Subject = "Teste" + contact.Email;
             mailMessage.Body = bodyMessage;
             mailMessage.IsBodyHtml = true;
-            
-            smtpClient.Send(mailMessage);
+
+            _smtpClient.Send(mailMessage);
         }
     }
 }
