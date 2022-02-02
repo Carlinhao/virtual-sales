@@ -23,10 +23,28 @@ namespace SalesMvc.Web.Libraries.Email
 
             string bodyMessage = string.Format($"<h2> Virtual Sale </h2> <br/> {contact.Name} <br/> {contact.Email} <br/> {contact.Text}");
 
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(_configuration.GetValue<string>("Email:UserName"));
+            MailMessage mailMessage = new MailMessage
+            {
+                From = new MailAddress(_configuration.GetValue<string>("Email:UserName"))
+            };
             mailMessage.To.Add("");
             mailMessage.Subject = "Teste" + contact.Email;
+            mailMessage.Body = bodyMessage;
+            mailMessage.IsBodyHtml = true;
+
+            _smtpClient.Send(mailMessage);
+        }
+
+        public void SendEmailToEmployee(Employee employee)
+        {
+            string bodyMessage = string.Format($"<h2> Employee - Virtual Sales </h2> <br/> {employee.Name} <br/> {employee.Email} <br/>");
+
+            MailMessage mailMessage = new MailMessage
+            {
+                From = new MailAddress(_configuration.GetValue<string>("Email:UserName"))
+            };
+            mailMessage.To.Add(employee.Email);
+            mailMessage.Subject = "Teste" + employee.Email;
             mailMessage.Body = bodyMessage;
             mailMessage.IsBodyHtml = true;
 
