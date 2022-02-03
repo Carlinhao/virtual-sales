@@ -138,4 +138,7 @@
   <data name="MSG_S002" xml:space="preserve">
     <value>Successfully deleted.</value>
   </data>
+  <data name="MSG_S003" xml:space="preserve">
+    <value>Send password successfully!</value>
+  </data>
 </root>
