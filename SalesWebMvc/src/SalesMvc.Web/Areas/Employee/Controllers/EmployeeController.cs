@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SalesMvc.Web.Libraries.Email;
 using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Libraries.Text;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -10,10 +11,13 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly ContactEmail _contactEmail;
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository,
+                                  ContactEmail contactEmail)
         {
             _employeeRepository = employeeRepository;
+            _contactEmail = contactEmail;
         }
 
         public async Task<IActionResult> Index(int? page)
@@ -46,13 +50,15 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> GeneratePassword(int id)
         {
-            // TODO send email
             var employee = await _employeeRepository.GetEmployerByIdAsync(id);
 
             employee.Password = KeyGenerator.GetUniqueKey(8);
             await _employeeRepository.UpdateAsync(employee);
+            _contactEmail.SendEmailToEmployee(employee);
 
-            return View();
+            TempData["MSG_S"] = Message.MSG_S003;
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
