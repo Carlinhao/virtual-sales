@@ -34,13 +34,16 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] Models.Employee employee)
         {
+            ModelState.Remove("Password");
+
             if (ModelState.IsValid)
             {
-                // TODO Generate password.
+                employee.Password = KeyGenerator.GetUniqueKey(8);
                 await _employeeRepository.CreateAsync(employee);
 
+                _contactEmail.SendEmailToEmployee(employee);
+                
                 TempData["MSG_S"] = Message.MSG_S001;
-                //  send e-mail
                 return RedirectToAction(nameof(Index));
             }
 
