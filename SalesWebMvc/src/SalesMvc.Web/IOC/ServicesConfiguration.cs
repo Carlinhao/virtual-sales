@@ -45,8 +45,6 @@ namespace SalesMvc.Web.IOC
                 return smtpClient;
             });
             services.AddScoped<ContactEmail>();
-            
-           
 
             return services;
         }
