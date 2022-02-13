@@ -56,7 +56,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             var employee = await _employeeRepository.GetEmployerByIdAsync(id);
 
             employee.Password = KeyGenerator.GetUniqueKey(8);
-            await _employeeRepository.UpdateAsync(employee);
+            await _employeeRepository.UpdatePasswordAsync(employee);
             _contactEmail.SendEmailToEmployee(employee);
 
             TempData["MSG_S"] = Message.MSG_S003;
