@@ -10,6 +10,7 @@ namespace SalesMvc.Web.Repositories.Interfaces
         Task CreateAsync(Employee employer);
         Task UpdateAsync(Employee employer);
         Task DeleteAsync(int id);
+        Task UpdatePasswordAsync(Employee employee);
 
         Task<Employee> GetEmployerByIdAsync(int id);
         Task<IEnumerable<Employee>> GetAllEmployer();

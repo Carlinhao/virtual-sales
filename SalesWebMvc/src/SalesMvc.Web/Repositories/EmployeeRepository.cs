@@ -54,6 +54,18 @@ namespace SalesMvc.Web.Repositories
         public async Task UpdateAsync(Employee employer)
         {
             _dBset.Update(employer);
+            _dbContext.Entry(employer).Property(x => x.Password).IsModified = false;
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdatePasswordAsync(Employee employee)
+        {
+            _dBset.Update(employee);
+            _dbContext.Entry(employee).Property(x => x.Name).IsModified = false;
+            _dbContext.Entry(employee).Property(x => x.Email).IsModified = false;
+            _dbContext.Entry(employee).Property(x => x.Type).IsModified = false;
+
             await _dbContext.SaveChangesAsync();
         }
 
@@ -68,6 +80,6 @@ namespace SalesMvc.Web.Repositories
             var result = await _dBset.Where(e => e.Type != "G").ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
             return result;
-        }
+        }        
     }
 }
