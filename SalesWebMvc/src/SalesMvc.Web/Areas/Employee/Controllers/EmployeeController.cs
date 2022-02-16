@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries.Email;
+using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Libraries.Text;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -8,6 +9,7 @@ using SalesMvc.Web.Repositories.Interfaces;
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
     [Area("Employee")]
+    [EmployerAuthorization("G")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;

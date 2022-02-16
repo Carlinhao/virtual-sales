@@ -80,6 +80,11 @@ namespace SalesMvc.Web.Repositories
             var result = await _dBset.Where(e => e.Type != "G").ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
             return result;
-        }        
+        }
+
+        public async Task<IEnumerable<Employee>> GetEmployerEmail(string email)
+        {
+            return await _dBset.Where(e => e.Email == email).ToListAsync();
+        }
     }
 }
