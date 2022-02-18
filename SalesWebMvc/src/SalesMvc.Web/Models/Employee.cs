@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using SalesMvc.Web.Libraries.Lang;
+using SalesMvc.Web.Libraries.Validation;
 
 namespace SalesMvc.Web.Models
 {
@@ -16,6 +17,7 @@ namespace SalesMvc.Web.Models
         [Display(Name = "E-mail")]
         [Required(ErrorMessage = null, ErrorMessageResourceName = "MSG_E001", ErrorMessageResourceType = typeof(Message))]
         [EmailAddress(ErrorMessage = null, ErrorMessageResourceName = "MSG_E004", ErrorMessageResourceType = typeof(Message))]
+        [UnicEmployeeEmail]
         public string Email { get; set; }
 
         [Required(ErrorMessage = null, ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "MSG_E001")]
