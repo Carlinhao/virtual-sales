@@ -82,9 +82,9 @@ namespace SalesMvc.Web.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployerEmail(string email)
+        public IEnumerable<Employee> GetEmployerEmail(string email)
         {
-            return await _dBset.Where(e => e.Email == email).ToListAsync();
+            return _dBset.Where(e => e.Email == email).ToList();
         }
     }
 }
