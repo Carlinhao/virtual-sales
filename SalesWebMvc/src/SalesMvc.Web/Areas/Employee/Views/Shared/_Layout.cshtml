@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject SalesMvc.Web.Libraries.Login.LoginEmployee _employee
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8">
@@ -8,8 +9,8 @@
 	<meta name="generator" content="Hugo 0.87.0">
 	<title>@ViewBag.Title</title>
 
-	<link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="~/resources/lib/paged-list/PagedList.css" rel="stylesheet" type="text/css"/>
+	<link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/resources/lib/paged-list/PagedList.css" rel="stylesheet" type="text/css" />
 
 	<link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -21,24 +22,25 @@
 
 
 	<style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      @@media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
 
-	 <link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+		@@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style>
+
+	<link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>	
+<body>
 	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Virtual Sales</a>
 		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +82,16 @@
 								<span data-feather="file"></span>
 								Orders
 							</a>
-						</li>						
+						</li>
+						@if (_employee.GetEmplyee().Type == "G")
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Employee" asp-action="Index" href="#">
+									<span data-feather="users"></span>
+									Employee
+								</a>
+							</li>
+						}
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
@@ -279,12 +290,12 @@
 			</main>
 		</div>
 	</div>
-    <script src="~/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"><\/script>')</script>
-    <script src="~/js/Actions.js"></script>
-    <script src="~/resources/lib/bootstrap-4.2.1-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/resources/lib/feather/feather.js"></script>
-    <script src="~/resources/lib/charts/charts.js"></script>
-    <script src="~/resources/lib/dashboard/dashboard.js"></script>
+	<script src="~/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"><\/script>')</script>
+	<script src="~/js/Actions.js"></script>
+	<script src="~/resources/lib/bootstrap-4.2.1-dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/resources/lib/feather/feather.js"></script>
+	<script src="~/resources/lib/charts/charts.js"></script>
+	<script src="~/resources/lib/dashboard/dashboard.js"></script>
 </body>
 </html>
