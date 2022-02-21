@@ -84,7 +84,7 @@ namespace SalesMvc.Web.Repositories
 
         public IEnumerable<Employee> GetEmployerEmail(string email)
         {
-            return _dBset.Where(e => e.Email == email).ToList();
+            return _dBset.Where(e => e.Email == email).AsNoTracking().ToList();
         }
     }
 }
