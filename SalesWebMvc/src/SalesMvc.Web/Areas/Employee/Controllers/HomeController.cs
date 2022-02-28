@@ -25,6 +25,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [EmployerAuthorization]
+        [ValidateHttpReferer]
         public IActionResult Logout()
         {
             _loginEmployee.Logout();
