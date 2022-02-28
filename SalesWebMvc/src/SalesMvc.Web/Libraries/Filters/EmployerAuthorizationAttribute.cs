@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using SalesMvc.Web.Libraries.Login;
+using SalesMvc.Web.Models.Constats;
 
 namespace SalesMvc.Web.Libraries.Filters
 {
     public class EmployerAuthorizationAttribute : Attribute, IAuthorizationFilter
     {
         private readonly string _authorize;
-        public EmployerAuthorizationAttribute(string authorize = "C")
+        public EmployerAuthorizationAttribute(string authorize = TypeEmployeeConstant.Common)
         {
             _authorize = authorize;
         }
@@ -25,7 +26,7 @@ namespace SalesMvc.Web.Libraries.Filters
             }
             else
             {
-                if (result.Type == "C" && _authorize == "G")
+                if (result.Type == TypeEmployeeConstant.Common && _authorize == TypeEmployeeConstant.Manager)
                     context.Result = new ForbidResult();
 
             }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
+using SalesMvc.Web.Models.Constats;
 using SalesMvc.Web.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace SalesMvc.Web.Repositories
 
         public async Task<IEnumerable<Employee>> GetAllEmployer()
         {
-            return await _dBset.Where(e => e.Type != "G").ToListAsync();
+            return await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToListAsync();
         }
 
         public async Task<Employee> GetEmployerByIdAsync(int id)
@@ -77,7 +78,7 @@ namespace SalesMvc.Web.Repositories
 
         public async Task<IPagedList<Employee>> GetAllEmployer(int? page)
         {
-            var result = await _dBset.Where(e => e.Type != "G").ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
+            var result = await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
             return result;
         }
