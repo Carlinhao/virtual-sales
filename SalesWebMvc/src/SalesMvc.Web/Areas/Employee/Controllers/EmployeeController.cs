@@ -4,12 +4,13 @@ using SalesMvc.Web.Libraries.Email;
 using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Libraries.Text;
+using SalesMvc.Web.Models.Constats;
 using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
     [Area("Employee")]
-    [EmployerAuthorization("G")]
+    [EmployerAuthorization(TypeEmployeeConstant.Manager)]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -53,6 +54,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
+        [ValidateHttpReferer]
         public async Task<IActionResult> GeneratePassword(int id)
         {
             var employee = await _employeeRepository.GetEmployerByIdAsync(id);
@@ -88,6 +90,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
+        [ValidateHttpReferer]
         public async Task<IActionResult> Delete(int id)
         {
             await _employeeRepository.DeleteAsync(id);

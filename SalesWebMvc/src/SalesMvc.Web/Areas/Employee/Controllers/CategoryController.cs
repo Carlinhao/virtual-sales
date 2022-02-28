@@ -53,6 +53,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
 
         [HttpGet]
+        [ValidateHttpReferer]
         public async Task<IActionResult> Update(int id)
         {
             var category = await _repository.GetByIdAsync(id);
@@ -80,6 +81,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         }
         
         [HttpGet]
+        [ValidateHttpReferer]
         public async Task<IActionResult> Delete(int id)
         {
             await _repository.DeleteAsync(id);

@@ -83,7 +83,7 @@
 								Orders
 							</a>
 						</li>
-						@if (_employee.GetEmplyee().Type == "G")
+						@if (_employee.GetEmplyee().Type == TypeEmployeeConstant.Manager)
 						{
 							<li class="nav-item">
 								<a class="nav-link" asp-controller="Employee" asp-action="Index" href="#">
