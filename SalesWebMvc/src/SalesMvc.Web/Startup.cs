@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.IOC;
+using SalesMvc.Web.Libraries.Middleware;
 
 namespace SalesMvc.Web
 {
@@ -47,6 +48,7 @@ namespace SalesMvc.Web
 
             app.UseAuthorization();
             app.UseSession();
+            app.UseMiddleware<ValidateAntiForgeryTokenMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
