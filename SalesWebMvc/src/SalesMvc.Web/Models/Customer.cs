@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using SalesMvc.Web.Libraries.Lang;
 
 namespace SalesMvc.Web.Models
