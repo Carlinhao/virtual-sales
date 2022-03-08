@@ -12,6 +12,6 @@ namespace SalesMvc.Web.Repositories.Interfaces
         Task UpdateAsync(Customer customer);
         Task DeleteAsync(int id);
         Task<Customer> GetCustomerByIdAsync(int id);
-        Task<IPagedList<Customer>> GetAllCustomer(int? page);
+        Task<IPagedList<Customer>> GetAllCustomer(int? page, string search = null);
     }
 }
