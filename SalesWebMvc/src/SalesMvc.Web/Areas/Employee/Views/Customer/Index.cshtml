@@ -6,6 +6,17 @@
 <h1>Customer</h1>
 <br />
 <br />
+<!--Search Form--> >
+<form method="get">
+   <div class="form-group">
+    <label for="search" ></label>
+    <input type="text" name="search" id="searchId"class="form-control" placeholder="Insert employee name or e-mail." >
+  </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<br />
+<br />
 
 @if (TempData["MSG_S"] != null)
 {
