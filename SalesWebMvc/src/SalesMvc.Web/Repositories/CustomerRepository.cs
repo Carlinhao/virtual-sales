@@ -38,10 +38,13 @@ namespace SalesMvc.Web.Repositories
             _dBset.Remove(customer);
             await _dbContext.SaveChangesAsync();
         }
-        public async Task<IPagedList<Customer>> GetAllCustomer(int? page)
+        public async Task<IPagedList<Customer>> GetAllCustomer(int? page, string search = null)
         {
-            var result = await _dBset.ToPagedListAsync(page ?? 1, _config.GetValue<int>("NumberOfPage"));
-            return result;
+            var costumers = _dBset.AsQueryable();
+            if (string.IsNullOrEmpty(search))
+                costumers = costumers.Where(x => x.Name.Contains(search.Trim()) || x.Email.Contains(search.Trim()));
+
+            return await costumers.ToPagedListAsync(page ?? 1, _config.GetValue<int>("NumberOfPage"));
         }
 
         public async Task<Customer> GetCustomerByIdAsync(int id)

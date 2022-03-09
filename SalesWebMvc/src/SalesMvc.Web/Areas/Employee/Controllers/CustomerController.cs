@@ -19,9 +19,9 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             _customerRepository = customerRepository;
         }
 
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(int? page, string search = null)
         {
-            IPagedList<Customer> customers = await _customerRepository.GetAllCustomer(page);
+            IPagedList<Customer> customers = await _customerRepository.GetAllCustomer(page, search);
 
             return View(customers);
         }
