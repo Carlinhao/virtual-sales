@@ -41,16 +41,11 @@ namespace SalesMvc.Web.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployer()
-        {
-            return await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToListAsync();
-        }
+        public async Task<IEnumerable<Employee>> GetAllEmployer() =>
+            await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToListAsync();
 
-        public async Task<Employee> GetEmployerByIdAsync(int id)
-        {
-            var employer = await _dBset.FirstOrDefaultAsync(x => x.Id == id);
-            return employer;
-        }
+        public async Task<Employee> GetEmployerByIdAsync(int id) =>
+            await _dBset.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task UpdateAsync(Employee employer)
         {
@@ -70,22 +65,13 @@ namespace SalesMvc.Web.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Employee> Login(string email, string password)
-        {
-            var result = await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
-            return result;
-        }
+        public async Task<Employee> Login(string email, string password) =>
+            await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
 
-        public async Task<IPagedList<Employee>> GetAllEmployer(int? page)
-        {
-            var result = await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
+        public async Task<IPagedList<Employee>> GetAllEmployer(int? page) =>
+            await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
-            return result;
-        }
-
-        public IEnumerable<Employee> GetEmployerEmail(string email)
-        {
-            return _dBset.Where(e => e.Email == email).AsNoTracking().ToList();
-        }
+        public IEnumerable<Employee> GetEmployerEmail(string email) =>
+            _dBset.Where(e => e.Email == email).AsNoTracking().ToList();
     }
 }

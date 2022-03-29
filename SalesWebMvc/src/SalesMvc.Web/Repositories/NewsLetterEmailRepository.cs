@@ -17,10 +17,8 @@ namespace SalesMvc.Web.Repositories
             _dBset = _context.Set<NewsLetterEmail>();
         }
 
-        public async Task<IEnumerable<NewsLetterEmail>> GetAllAsync()
-        {
-            return await _dBset.ToListAsync();
-        }
+        public async Task<IEnumerable<NewsLetterEmail>> GetAllAsync() =>
+            await _dBset.ToListAsync();
 
         public async Task RegisterEmail(NewsLetterEmail newsLetter)
         {
