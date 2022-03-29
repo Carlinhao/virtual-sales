@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SalesMvc.Web.Models
 {
@@ -21,5 +22,7 @@ namespace SalesMvc.Web.Models
 
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+
+        public ICollection<Image> Imagens { get; set; }
     }
 }
