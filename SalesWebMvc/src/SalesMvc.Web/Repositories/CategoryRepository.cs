@@ -39,22 +39,14 @@ namespace SalesMvc.Web.Repositories
             await _context.SaveChangesAsync(); 
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategories()
-        {
-            return await _dbset.ToListAsync();
-        }
+        public async Task<IEnumerable<Category>> GetAllCategories() =>
+            await _dbset.ToListAsync();
 
-        public async Task<IPagedList<Category>> GetAllCategory(int? page)
-        {
-            var result = await _dbset.Include(a => a.CategoryFather).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
-            return result;
-        }
+        public async Task<IPagedList<Category>> GetAllCategory(int? page) =>
+            await _dbset.Include(a => a.CategoryFather).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
-        public async Task<Category> GetByIdAsync(int id)
-        {
-            var customer = await _dbset.FirstOrDefaultAsync(x => x.Id == id);
-            return customer;
-        }
+        public async Task<Category> GetByIdAsync(int id) =>
+            await _dbset.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task UpdateAsync(Category category)
         {

@@ -1,6 +1,7 @@
 ﻿@model IPagedList<Customer>
 @{
 	ViewData["Title"] = "Employee";
+	var search = Context.Request.Query["search"];
 }
 
 <h1>Customer</h1>
@@ -10,7 +11,7 @@
 <form method="get">
    <div class="form-group">
     <label for="search" ></label>
-    <input type="text" name="search" id="searchId"class="form-control" placeholder="Insert employee name or e-mail." >
+    <input type="text" name="search" value="@search" id="searchId"class="form-control" placeholder="Insert employee name or e-mail." >
   </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
@@ -58,7 +59,7 @@
 			</tbody>
 		</table>
 	</div>
-	@Html.PagedListPager( (IPagedList)Model, page => Url.Action("Index", new { page }) )
+	@Html.PagedListPager( (IPagedList)Model, page => Url.Action("Index", new { page = page, search = search }) )
 }
 else
 {
