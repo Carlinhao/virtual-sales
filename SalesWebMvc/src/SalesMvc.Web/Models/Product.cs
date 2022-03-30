@@ -8,6 +8,8 @@ namespace SalesMvc.Web.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Value { get; set; }
         public int ProductQuantity { get; set; }
 
@@ -21,8 +23,8 @@ namespace SalesMvc.Web.Models
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public ICollection<Image> Imagens { get; set; }
+        public virtual ICollection<Image> Imagens { get; set; }
     }
 }
