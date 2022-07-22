@@ -10,7 +10,7 @@ namespace SalesMvc.Web.Repositories.Interfaces
         Task UpdateAsync(Product product);
         Task DeleteAsync(int id);
 
-        Task<Product> GetEmployerByIdAsync(int id);
+        Task<Product> GetProductByIdAsync(int id);
         Task<IPagedList<Product>> GetAllProduct(int? page, string search);
     }
 }
