@@ -23,29 +23,27 @@ namespace SalesMvc.Web.Repositories
             _configuration = configuration;
         }
 
-        public Task CreateAsync(Product product)
+        public async Task CreateAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            await _dBset.AddAsync(product);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task DeleteAsync(int id) =>
+            await _dBset.FirstOrDefaultAsync(x => x.Id == id);
 
         public Task<IPagedList<Product>> GetAllProduct(int? page, string search)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Product> GetEmployerByIdAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<Product> GetProductByIdAsync(int id) =>
+            await _dBset.FirstOrDefaultAsync(x => x.Id == id);
 
-        public Task UpdateAsync(Product product)
+        public async Task UpdateAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            _dBset.Update(product);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
