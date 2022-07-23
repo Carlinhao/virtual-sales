@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.DataBase;
@@ -33,12 +34,12 @@ namespace SalesMvc.Web.Repositories
             await _dBset.FirstOrDefaultAsync(x => x.Id == id);
 
         public Task<IPagedList<Product>> GetAllProduct(int? page, string search)
-        {
-            throw new System.NotImplementedException();
-        }
+            => _dBset.Include(i => i.Imagens)
+                     .Where(a => a.Name.Contains(search.Trim()))
+                     .ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
 
         public async Task<Product> GetProductByIdAsync(int id) =>
-            await _dBset.FirstOrDefaultAsync(x => x.Id == id);
+            await _dBset.Include(i => i.Imagens).Where(x => x.Id == id).FirstOrDefaultAsync();
 
         public async Task UpdateAsync(Product product)
         {
