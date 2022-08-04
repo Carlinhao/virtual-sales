@@ -1,24 +1,47 @@
-﻿using System.Threading.Tasks;
+﻿using SalesMvc.Web.Repositories.Interfaces;
 using SalesMvc.Web.Models;
-using SalesMvc.Web.Repositories.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SalesMvc.Web.DataBase;
+using System.Linq;
 
 namespace SalesMvc.Web.Repositories
 {
     public class ImageRepository : IImageRepository
     {
-        public Task CreateAsync(Image image)
+        private readonly ApplicationDbContext _dbContext;
+        private readonly DbSet<Image> _dBset;
+
+        public ImageRepository(ApplicationDbContext dbContext)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
+            _dBset = _dbContext.Set<Image>();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task CreateAsync(Image image)
         {
-            throw new System.NotImplementedException();
+            await _dBset.AddAsync(image);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteImageProductAsync(int productId)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var image = await _dBset.FindAsync(id);
+            if (image is null)
+                return;
+
+            _dBset.Remove(image);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteImageProductAsync(int productId)
+        {
+            var images = await _dBset.Where(x => x.ProductId == productId).ToListAsync();
+            if (images is null)
+                return;
+
+            _dBset.RemoveRange(images);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
