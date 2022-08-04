@@ -19,6 +19,8 @@ namespace SalesMvc.Web.IOC
             services.AddScoped<INewsLetterEmailRepository, NewsLetterEmailRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
             // Session
             services.AddMemoryCache();
