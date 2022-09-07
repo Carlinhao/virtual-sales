@@ -14,10 +14,10 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly ContactEmail _contactEmail;
+        private readonly IContactEmail _contactEmail;
 
         public EmployeeController(IEmployeeRepository employeeRepository,
-                                  ContactEmail contactEmail)
+                                  IContactEmail contactEmail)
         {
             _employeeRepository = employeeRepository;
             _contactEmail = contactEmail;

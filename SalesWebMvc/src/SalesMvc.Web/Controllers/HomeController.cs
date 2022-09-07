@@ -18,12 +18,12 @@ namespace SalesMvc.Web.Controllers
         private readonly ICustomerRepository _costumerRepository;
         private readonly INewsLetterEmailRepository _newsLetterEmailRepository;
         private readonly LoginCostumer _loginCostumer;
-        private readonly ContactEmail _contactEmail;
+        private readonly IContactEmail _contactEmail;
 
         public HomeController(ICustomerRepository repository,
                               INewsLetterEmailRepository newsLetterEmailRepository,
                               LoginCostumer loginCostumer,
-                              ContactEmail contactEmail)
+                              IContactEmail contactEmail)
         {
             _costumerRepository = repository;
             _newsLetterEmailRepository = newsLetterEmailRepository;
