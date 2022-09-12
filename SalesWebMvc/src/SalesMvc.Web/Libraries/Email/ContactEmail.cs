@@ -4,7 +4,7 @@ using SalesMvc.Web.Models;
 
 namespace SalesMvc.Web.Libraries.Email
 {
-    public class ContactEmail
+    public class ContactEmail : IContactEmail
     {
         private readonly SmtpClient _smtpClient;
         private readonly IConfiguration _configuration;
@@ -27,11 +27,12 @@ namespace SalesMvc.Web.Libraries.Email
             {
                 From = new MailAddress(_configuration.GetValue<string>("Email:UserName"))
             };
-            mailMessage.To.Add("");
+            mailMessage.To.Add("teste@gmail.com");
             mailMessage.Subject = "Teste" + contact.Email;
             mailMessage.Body = bodyMessage;
             mailMessage.IsBodyHtml = true;
 
+            _smtpClient.Host = "smtp.gmail.com";
             _smtpClient.Send(mailMessage);
         }
 
