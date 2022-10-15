@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using SalesMvc.Web.Libraries.Email;
-using System.Net.Mail;
-using Xunit;
+﻿using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 using Moq;
-using Shouldly;
-using SalesMvc.Web.Models;
+using SalesMvc.Web.Libraries.Email;
+using Xunit;
 
 namespace SalesWebMvc.Test.Libraires
 {
