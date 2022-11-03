@@ -14,13 +14,11 @@ namespace SalesMvc.Web.Repositories
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Product> _dBset;
         private readonly IConfiguration _configuration;
-
         public ProductRepository(ApplicationDbContext dbContext,
-                                 DbSet<Product> dBset,
                                  IConfiguration configuration)
         {
             _dbContext = dbContext;
-            _dBset = dBset;
+            _dBset = _dbContext.Set<Product>();
             _configuration = configuration;
         }
 
