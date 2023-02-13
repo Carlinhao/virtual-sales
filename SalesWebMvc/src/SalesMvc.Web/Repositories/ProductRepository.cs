@@ -31,10 +31,17 @@ namespace SalesMvc.Web.Repositories
         public async Task DeleteAsync(int id) =>
             await _dBset.FirstOrDefaultAsync(x => x.Id == id);
 
-        public Task<IPagedList<Product>> GetAllProduct(int? page, string search)
-            => _dBset.Include(i => i.Imagens)
-                     .Where(a => a.Name.Contains(search.Trim()))
+        public async Task<IPagedList<Product>> GetAllProduct(int? page, string search)
+        {
+
+            var product = _dbContext.Products.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+                product = product.Where(a => a.Name.Contains(search.Trim()));
+
+            return await product.Include(i => i.Imagens)
                      .ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
+        }
 
         public async Task<Product> GetProductByIdAsync(int id) =>
             await _dBset.Include(i => i.Imagens).Where(x => x.Id == id).FirstOrDefaultAsync();
