@@ -1,0 +1,7 @@
+﻿{
+  "stryker-config":
+  {
+    "solution": "../SalesWebMvc.sln",
+    "project": "SalesWebMvc.Test.csproj"
+  }
+}
