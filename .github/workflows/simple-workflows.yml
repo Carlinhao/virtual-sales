@@ -27,4 +27,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run unit tests
-        run: dotnet test SalesWebMvc/SalesWebMvc.sln/test/SalesWebMvc.Test
+        run: dotnet test SalesWebMvc/test/SalesWebMvc.Test
