@@ -29,7 +29,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
         public async Task<IActionResult> Create()
         {
             var result = await _repository.GetAllCategories();
-            ViewBag.Categories = result.ToList().Select(a => new SelectListItem(a.Name,
+            ViewBag.Categories = result.AsEnumerable().Select(a => new SelectListItem(a.Name,
                                                                                 a.Id.ToString()));
 
             return View();
@@ -47,7 +47,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var result = await _repository.GetAllCategories();
-            ViewBag.Categories = result.ToList().Select(a => new SelectListItem(a.Name,
+            ViewBag.Categories = result.AsEnumerable().Select(a => new SelectListItem(a.Name,
                                                                                 a.Id.ToString()));
             return View();
         }
@@ -59,7 +59,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
             var category = await _repository.GetByIdAsync(id);
 
             var result = await _repository.GetAllCategories();
-            ViewBag.Categories = result.ToList().Where(c => c.Id != id).Select(a => new SelectListItem(a.Name,
+            ViewBag.Categories = result.AsEnumerable().Where(c => c.Id != id).Select(a => new SelectListItem(a.Name,
                                                                                 a.Id.ToString()));
             return View(category);
         }
@@ -75,7 +75,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var result = await _repository.GetAllCategories();
-            ViewBag.Categories = result.ToList().Where(c => c.Id != id).Select(a => new SelectListItem(a.Name,
+            ViewBag.Categories = result.AsEnumerable().Where(c => c.Id != id).Select(a => new SelectListItem(a.Name,
                                                                                 a.Id.ToString()));
             return View();
         }
