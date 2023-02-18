@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic; 
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +6,6 @@ using Moq;
 using SalesMvc.Web.Areas.Employee.Controllers;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
-using Shouldly;
 using X.PagedList;
 using Xunit;
 
@@ -24,8 +21,8 @@ namespace SalesWebMvc.Test.Controller
         }
 
 
-        [Fact(DisplayName ="Should return data with success.")]
-        [Trait("category","Controller test")]
+        [Fact(DisplayName = "Should return data with success.")]
+        [Trait("category", "ProductController")]
         public async Task Index_WhenFindData_MustReturnSuccess()
         {
             // Arrange
@@ -38,7 +35,7 @@ namespace SalesWebMvc.Test.Controller
             var result = await controller.Index(0, "");
             var data = result as ViewResult;
             var model = data.Model as PagedList<Product>;
-            
+
             // Assert
             Assert.Equal(3, model.ToList().Count);
             Assert.Collection(model.ToList(),
@@ -46,6 +43,24 @@ namespace SalesWebMvc.Test.Controller
                 item => Assert.Equal(1231, item.Id),
                 item => Assert.Equal(321324, item.Id));
 
+        }
+
+        [Fact(DisplayName = "Not found data")]
+        [Trait("category", "ProductController")]
+        public async Task Index_WhenNotFoundData_MustReturnNull()
+        {
+            // Arrange
+            var controller = GetController();
+            IPagedList<Product> products = null;
+
+            // Act
+            _productRepository.Setup(x => x.GetAllProduct(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(products);
+            var result = await controller.Index(0, "");
+            var data = result as ViewResult;
+            var model = data.Model as PagedList<Product>;
+
+            // Assert
+            Assert.Null(model);
         }
 
         private ProductController GetController()
