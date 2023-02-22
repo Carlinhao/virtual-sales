@@ -14,10 +14,12 @@ namespace SalesWebMvc.Test.Controller
     public class ProductControllerTest
     {
         private readonly Mock<IProductRepository> _productRepository;
+        private readonly Mock<ICategoryRepository> _categoryRepository;
 
         public ProductControllerTest()
         {
             _productRepository = new Mock<IProductRepository>();
+            _categoryRepository = new Mock<ICategoryRepository>();
         }
 
 
@@ -64,7 +66,7 @@ namespace SalesWebMvc.Test.Controller
         }
 
         private ProductController GetController()
-            => new ProductController(_productRepository.Object);
+            => new ProductController(_productRepository.Object, _categoryRepository.Object);
 
         private IQueryable<Product>  GetProducts()
             => new List<Product>
