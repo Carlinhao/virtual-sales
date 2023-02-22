@@ -4,14 +4,14 @@
 	var search = Context.Request.Query["search"];
 }
 
-<h1>Customer</h1>
+<h1>Prodcut</h1>
 <br />
 <br />
-<!--Search Form--> >
+<!--Search Form-->
 <form method="get">
    <div class="form-group">
     <label for="search" ></label>
-    <input type="text" name="search" value="@search" id="searchId"class="form-control" placeholder="Insert product name." >
+    <input type="text" name="search" value="@search" id="searchId"class="form-control" placeholder="Enter product name." >
   </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
@@ -23,6 +23,8 @@
 {
 	<p class="alert alert-success">@TempData["MSG_S"]</p>
 }
+
+<a asp-action="Create" class="btn btn-primary">Register</a>
 
 @if (Model.Count > 0)
 

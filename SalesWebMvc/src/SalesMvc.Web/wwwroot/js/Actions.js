@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
     $(".btn-danger").click(function (e) {
-        var result = confirm("Confirm?");
-        if (result == false) {
+        let result = confirm("Confirm?");
+        if (!result) {
             e.preventDefault();
         }
     });
+    $('.money').mask('000.000.000.000.000,00', { reverse: true });
 });

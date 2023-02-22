@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesMvc.Web.Repositories.Interfaces;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
@@ -8,27 +10,30 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ProductController(IProductRepository productRepository)
-        {
-            _productRepository = productRepository;
-        }
+		public ProductController(IProductRepository productRepository, 
+                                 ICategoryRepository categoryRepository)
+		{
+			_productRepository = productRepository;
+			_categoryRepository = categoryRepository;
+		}
 
-        [HttpGet]
+		[HttpGet]
         public async Task<IActionResult> Index(int? page, string search)
         {
             var result = await _productRepository.GetAllProduct(page, search);
             return View(result);
         }
 
-        public IActionResult Update()
+		[HttpGet]
+		public async Task<IActionResult> Create()
         {
-            throw new System.NotImplementedException();
-        }
+            var result = await _categoryRepository.GetAllCategories();
+			ViewBag.Categories = result.AsEnumerable().Select(a => new SelectListItem(a.Name,
+																				a.Id.ToString()));
 
-        public IActionResult Delete()
-        {
-            throw new System.NotImplementedException();
+			return View();
         }
     }
 }

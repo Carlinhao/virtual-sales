@@ -1,0 +1,113 @@
+﻿@model Product
+@{
+	ViewData["Title"] = "Register Product";
+}
+
+<h1>Register Product</h1>
+
+<form method="post">
+
+	<!--Categories-->
+
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label asp-for="CategoryId"></label>
+			<select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Categories">
+				<option value="">Select</option>
+			</select>
+			<span asp-validation-for="CategoryId" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-6">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" placeholder="Enter product name." />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>		
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Description"></label>
+		<textarea asp-for="Description" class="form-control"></textarea>
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label asp-for="ProductQuantity"></label>
+			<div class="input-group mb-2">
+				<input asp-for="ProductQuantity" class="form-control" placeholder="Enter quantity of products." />
+				<div class="input-group-prepend">
+					<div class="input-group-text">Unit</div>
+				</div>
+			</div>
+			<span asp-validation-for="ProductQuantity" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-6">
+			<label asp-for="Value"></label>
+			<div class="input-group mb-2">
+				<div class="input-group-prepend">
+					<div class="input-group-text">R$</div>
+				</div>
+				<input asp-for="Value" class="form-control money" placeholder="Enter product price." />
+			</div>
+			<span asp-validation-for="Value" class="text-danger"></span>
+		</div>		
+	</div>
+
+	<!--Delivery-->
+	<h2>Delivery</h2>
+
+	<div class="row">
+		<div class="form-group col-md-3">
+			<label asp-for="Peso"></label>
+			<div class="input-group mb-2">
+				<input asp-for="Peso" class="form-control" />
+				<div class="input-group-prepend">
+					<div class="input-group-text">KG</div>
+				</div>
+			</div>
+			<span asp-validation-for="ProductQuantity" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-3">
+			<label asp-for="Hight"></label>
+			<div class="input-group mb-2">
+				<input asp-for="Hight" class="form-control" />
+				<div class="input-group-prepend">
+					<div class="input-group-text">Unit</div>
+				</div>
+			</div>
+			<span asp-validation-for="Hight" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-3">
+			<label asp-for="Large"></label>
+			<div class="input-group mb-2">
+				<input asp-for="Large" class="form-control" />
+				<div class="input-group-prepend">
+					<div class="input-group-text">Unit</div>
+				</div>
+			</div>
+			<span asp-validation-for="Large" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-3">
+			<label asp-for="Length"></label>
+			<div class="input-group mb-2">
+				<input asp-for="Length" class="form-control" />
+				<div class="input-group-prepend">
+					<div class="input-group-text">Unit</div>
+				</div>
+			</div>
+			<span asp-validation-for="Length" class="text-danger"></span>
+		</div>
+	</div>
+	
+	<div class="row Imagens">
+		@for(var i = 0; i < 12; i++)
+		{
+			<div class="col-md-3">
+				<img src="/img/check_one.png" class="img-thumbnail"/>
+				<div class="btn btn-danger btn-imagem-delete">x</div>
+			</div>
+		}
+	</div>
+
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
