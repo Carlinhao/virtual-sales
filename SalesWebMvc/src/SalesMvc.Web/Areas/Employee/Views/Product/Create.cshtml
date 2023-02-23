@@ -34,7 +34,7 @@
 		<div class="form-group col-md-6">
 			<label asp-for="ProductQuantity"></label>
 			<div class="input-group mb-2">
-				<input asp-for="ProductQuantity" class="form-control" placeholder="Enter quantity of products." />
+				<input asp-for="ProductQuantity" type="number" class="form-control" placeholder="Enter quantity of products." />
 				<div class="input-group-prepend">
 					<div class="input-group-text">Unit</div>
 				</div>
@@ -65,12 +65,12 @@
 					<div class="input-group-text">KG</div>
 				</div>
 			</div>
-			<span asp-validation-for="ProductQuantity" class="text-danger"></span>
+			<span asp-validation-for="Peso" class="text-danger"></span>
 		</div>
 		<div class="form-group col-md-3">
 			<label asp-for="Hight"></label>
 			<div class="input-group mb-2">
-				<input asp-for="Hight" class="form-control" />
+				<input asp-for="Hight" type="number" class="form-control" />
 				<div class="input-group-prepend">
 					<div class="input-group-text">Unit</div>
 				</div>
@@ -80,7 +80,7 @@
 		<div class="form-group col-md-3">
 			<label asp-for="Large"></label>
 			<div class="input-group mb-2">
-				<input asp-for="Large" class="form-control" />
+				<input asp-for="Large" type="number" class="form-control" />
 				<div class="input-group-prepend">
 					<div class="input-group-text">Unit</div>
 				</div>
@@ -90,7 +90,7 @@
 		<div class="form-group col-md-3">
 			<label asp-for="Length"></label>
 			<div class="input-group mb-2">
-				<input asp-for="Length" class="form-control" />
+				<input asp-for="Length" type="number" class="form-control" />
 				<div class="input-group-prepend">
 					<div class="input-group-text">Unit</div>
 				</div>
