@@ -106,6 +106,15 @@ namespace SalesMvc.Web.Libraries.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value field {0} is between {1} and {2}..
+        /// </summary>
+        public static string MSG_E006 {
+            get {
+                return ResourceManager.GetString("MSG_E006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register save succsess..
         /// </summary>
         public static string MSG_S001 {
