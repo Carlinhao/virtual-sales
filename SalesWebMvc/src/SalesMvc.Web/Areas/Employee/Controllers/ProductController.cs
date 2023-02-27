@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
@@ -56,7 +57,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 			return View();
 		}
 
-		[HttpPut]
+		[HttpGet]
 		public async Task<IActionResult> Update(int id)
 		{
 			var result = await _categoryRepository.GetAllCategories();
@@ -67,7 +68,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 			return View(product);
 		}
 
-		[HttpPut]
+		[HttpPost]
 		public async Task<IActionResult> Update(Product product, int id)
 		{
 			if (ModelState.IsValid) 
