@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SalesMvc.Web.Libraries.Filters;
 using SalesMvc.Web.Libraries.Lang;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
