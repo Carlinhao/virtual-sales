@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalesMvc.Web.Libraries;
 
@@ -18,7 +17,7 @@ namespace SalesMvc.Web.Areas.Employee.Controllers
 			return new StatusCodeResult(500);
 		}
 
-		public async Task<IActionResult> Delete(string pathFile)
+		public IActionResult Delete(string pathFile)
 		{
 			if (FileManagement.DeleteProductImage(pathFile))
 				return Ok();
