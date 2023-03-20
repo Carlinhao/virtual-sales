@@ -6,8 +6,8 @@ namespace SalesMvc.Web.Libraries.Middleware
 {
     public class ValidateAntiForgeryTokenMiddleware
     {
-        private RequestDelegate _next;
-        private IAntiforgery _antiforgery;
+        private readonly RequestDelegate _next;
+        private readonly IAntiforgery _antiforgery;
 
         public ValidateAntiForgeryTokenMiddleware(
             RequestDelegate next,
@@ -19,12 +19,13 @@ namespace SalesMvc.Web.Libraries.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            if (HttpMethods.IsPost(context.Request.Method))
-            {
-                await _antiforgery.ValidateRequestAsync(context);
-            }
+            var ajaxRequest = context.Request.Headers["x-requested-with"];
+            var ajax = ajaxRequest == "XMLHttpRequest";
 
-            await _next(context);
+            if (HttpMethods.IsPost(context.Request.Method) && !(context.Request.Form.Files.Count == 1 && ajax))
+			    await _antiforgery.ValidateRequestAsync(context);
+
+			await _next(context);
         }
     }
 }
