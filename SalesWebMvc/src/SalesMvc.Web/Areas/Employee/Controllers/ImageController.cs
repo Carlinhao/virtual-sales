@@ -5,12 +5,15 @@ using SalesMvc.Web.Libraries;
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
 	[Area("Employee")]
-	[Controller]
 	public class ImageController : Controller
 	{
-		public IActionResult Import(IFormFile image)
+		[HttpPost]
+		public IActionResult Import(IFormFile file)
 		{
-			var pathFile = FileManagement.SaveProductImage(image);
+			if (file is null)
+				return BadRequest();
+
+			var pathFile = FileManagement.SaveProductImage(file);
 			if (pathFile.Length > 0)
 				return Ok(new { caminho = pathFile });
 
