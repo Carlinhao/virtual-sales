@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace SalesMvc.Web.Libraries
 {
-	public class FileManagement
+	public static class FileManagement
 	{
 		public static string SaveProductImage(IFormFile file)
 		{
 			var fileName = Path.GetFileName(file.FileName);
-			var completePaht = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/temp", fileName);
+			var completePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/temp", fileName);
 
-			using var stream = new FileStream(completePaht, FileMode.Create);
+			using var stream = new FileStream(completePath, FileMode.Create);
 			file.CopyTo(stream);
 
 			return Path.Combine("/uploads/temp", fileName);
@@ -18,10 +18,10 @@ namespace SalesMvc.Web.Libraries
 
 		public static bool DeleteProductImage(string filePath)
 		{
-			var completePaht = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath.TrimStart('/'));
-			if (File.Exists(completePaht)) 
+			var completePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath.TrimStart('/'));
+			if (File.Exists(completePath)) 
 			{
-				File.Delete(completePaht);
+				File.Delete(completePath);
 				return true;
 			}
 
