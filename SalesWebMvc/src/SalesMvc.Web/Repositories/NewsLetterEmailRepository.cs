@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;

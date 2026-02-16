@@ -1,9 +1,7 @@
 ﻿using SalesMvc.Web.Repositories.Interfaces;
 using SalesMvc.Web.Models;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesMvc.Web.DataBase;
-using System.Linq;
 
 namespace SalesMvc.Web.Repositories
 {

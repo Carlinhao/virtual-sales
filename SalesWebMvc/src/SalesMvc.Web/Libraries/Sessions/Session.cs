@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace SalesMvc.Web.Libraries.Sessions
+﻿namespace SalesMvc.Web.Libraries.Sessions
 {
     public class Session
     {
