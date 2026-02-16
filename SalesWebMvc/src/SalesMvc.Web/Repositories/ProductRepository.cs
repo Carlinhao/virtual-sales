@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace SalesMvc.Web.Repositories
 {
@@ -39,8 +37,8 @@ namespace SalesMvc.Web.Repositories
             if (!string.IsNullOrWhiteSpace(search))
                 product = product.Where(a => a.Name.Contains(search.Trim()));
 
-            return await product.Include(i => i.Imagens)
-                     .ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
+            return await Task.FromResult(product.Include(i => i.Imagens)
+                     .ToPagedList(page ?? 1, _configuration.GetValue<int>("NumberOfPage")));
         }
 
         public async Task<Product> GetProductByIdAsync(int id) =>

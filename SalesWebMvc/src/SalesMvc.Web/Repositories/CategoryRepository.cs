@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace SalesMvc.Web.Repositories
 {
@@ -43,10 +41,10 @@ namespace SalesMvc.Web.Repositories
             await _dbset.ToListAsync();
 
         public async Task<IPagedList<Category>> GetAllCategory(int? page) =>
-            await _dbset.Include(a => a.CategoryFather).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
+            await Task.FromResult(_dbset.Include(a => a.CategoryFather).ToPagedList(page ?? 1, _configuration.GetValue<int>("NumberOfPage")));
 
         public async Task<Category> GetByIdAsync(int id) =>
-            await _dbset.FirstOrDefaultAsync(x => x.Id == id);
+            await _dbset.SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task UpdateAsync(Category category)
         {

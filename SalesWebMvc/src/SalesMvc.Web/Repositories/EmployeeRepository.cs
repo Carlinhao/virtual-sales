@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.DataBase;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Models.Constats;
 using SalesMvc.Web.Repositories.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace SalesMvc.Web.Repositories
 {
@@ -69,7 +66,7 @@ namespace SalesMvc.Web.Repositories
             await _dBset.Where(x => x.Email == email && x.Password == password).FirstOrDefaultAsync();
 
         public async Task<IPagedList<Employee>> GetAllEmployer(int? page) =>
-            await _dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToPagedListAsync(page ?? 1, _configuration.GetValue<int>("NumberOfPage"));
+            await Task.FromResult(_dBset.Where(e => e.Type != TypeEmployeeConstant.Manager).ToPagedList(page ?? 1, _configuration.GetValue<int>("NumberOfPage")));
 
         public IEnumerable<Employee> GetEmployerEmail(string email) =>
             _dBset.Where(e => e.Email == email).AsNoTracking().ToList();
