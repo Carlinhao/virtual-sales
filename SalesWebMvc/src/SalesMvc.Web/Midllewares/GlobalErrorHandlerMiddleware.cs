@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+﻿using System.Net;
 using Newtonsoft.Json;
 
 namespace SalesMvc.Web.Midllewares
@@ -21,7 +17,7 @@ namespace SalesMvc.Web.Midllewares
 
         public async Task InvokAsync(HttpContext context)
         {
-            _logger.Log(LogLevel.Information, "GlobalErrorHandler", context);
+            _logger.Log(LogLevel.Information, "GlobalErrorHandler: {Context}", context);
 
             try
             {

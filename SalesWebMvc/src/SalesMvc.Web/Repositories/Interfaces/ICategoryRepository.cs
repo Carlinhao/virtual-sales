@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using SalesMvc.Web.Models;
-using System.Collections.Generic;
 using X.PagedList;
 
 namespace SalesMvc.Web.Repositories.Interfaces

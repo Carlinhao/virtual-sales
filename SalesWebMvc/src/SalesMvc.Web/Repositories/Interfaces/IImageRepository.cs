@@ -1,5 +1,4 @@
 ﻿using SalesMvc.Web.Models;
-using System.Threading.Tasks;
 
 namespace SalesMvc.Web.Repositories.Interfaces
 {

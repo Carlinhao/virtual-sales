@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using SalesMvc.Web.Models;
 using SalesMvc.Web.Repositories.Interfaces;
 

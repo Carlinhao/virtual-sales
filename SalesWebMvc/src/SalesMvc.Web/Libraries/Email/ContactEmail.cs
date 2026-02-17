@@ -1,5 +1,4 @@
 ﻿using System.Net.Mail;
-using Microsoft.Extensions.Configuration;
 using SalesMvc.Web.Models;
 
 namespace SalesMvc.Web.Libraries.Email
