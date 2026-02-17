@@ -17,7 +17,7 @@ namespace SalesMvc.Web.Midllewares
 
         public async Task InvokAsync(HttpContext context)
         {
-            _logger.Log(LogLevel.Information, "GlobalErrorHandler", context);
+            _logger.Log(LogLevel.Information, "GlobalErrorHandler: {Context}", context);
 
             try
             {
