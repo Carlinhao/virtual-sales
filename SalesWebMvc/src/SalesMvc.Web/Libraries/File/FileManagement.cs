@@ -1,27 +1,26 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Http;
-
-namespace SalesMvc.Web.Libraries
+﻿namespace SalesMvc.Web.Libraries.File
 {
 	public static class FileManagement
 	{
 		public static string SaveProductImage(IFormFile file)
 		{
 			var fileName = Path.GetFileName(file.FileName);
-			var completePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/temp", fileName);
+			var completePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\uploads\temp\", fileName);
 
-			using var stream = new FileStream(completePath, FileMode.Create);
-			file.CopyTo(stream);
+			using(FileStream stream = new FileStream(completePath, FileMode.Create))
+			{
+				file.CopyTo(stream);
+			}
 
-			return Path.Combine("/uploads/temp", fileName);
+			return Path.Combine("/uploads/temp/", fileName);
 		}
 
 		public static bool DeleteProductImage(string filePath)
 		{
 			var completePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath.TrimStart('/'));
-			if (File.Exists(completePath)) 
+			if (System.IO.File.Exists(completePath)) 
 			{
-				File.Delete(completePath);
+				System.IO.File.Delete(completePath);
 				return true;
 			}
 
