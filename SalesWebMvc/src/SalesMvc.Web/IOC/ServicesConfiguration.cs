@@ -3,7 +3,6 @@ using SalesMvc.Web.Libraries.Sessions;
 using SalesMvc.Web.Repositories.Interfaces;
 using SalesMvc.Web.Repositories;
 using System.Net.Mail;
-using System.Net;
 using SalesMvc.Web.Libraries.Email;
 
 namespace SalesMvc.Web.IOC
@@ -32,15 +31,15 @@ namespace SalesMvc.Web.IOC
             // SMTP
             services.AddScoped(options =>
             {
-                SmtpClient smtpClient = new SmtpClient()
-                {
-                    Host = configuration.GetValue<string>("ServerSMTP"),
-                    Port = configuration.GetValue<int>("ServerPort"),
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(configuration.GetValue<string>("UserName"),
-                                                        configuration.GetValue<string>("Password")),
-                    EnableSsl = true
-                };
+                SmtpClient smtpClient = new SmtpClient();
+                // {
+                //     Host = configuration.GetValue<string>("ServerSMTP"),
+                //     Port = configuration.GetValue<int>("ServerPort"),
+                //     UseDefaultCredentials = false,
+                //     Credentials = new NetworkCredential(configuration.GetValue<string>("UserName"),
+                //                                         configuration.GetValue<string>("Password")),
+                //     EnableSsl = true
+                // };
 
                 return smtpClient;
             });
