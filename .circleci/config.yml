@@ -6,6 +6,11 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:10.0
 
     steps:
+      - run:
+          name: "Install SSH and Git"
+          command: |
+            apt-get update
+            apt-get install -y openssh-client git
       - checkout
       - run:
           name: "Restore dependencies"
