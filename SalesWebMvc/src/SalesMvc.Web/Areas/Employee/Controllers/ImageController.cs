@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using SalesMvc.Web.Libraries;
+﻿using Microsoft.AspNetCore.Mvc;
+using SalesMvc.Web.Libraries.File;
 
 namespace SalesMvc.Web.Areas.Employee.Controllers
 {
