@@ -20,7 +20,9 @@ function AjaxImageUpload() {
         var form = new FormData();
 
         form.append("file", files[0]);
-
+        var campoHidden = $(this).parent().find("input[name=image]");
+        var imageUp = $(this).parent().find("img-upload");
+        
         $.ajax({
             type: "POST",
             url: "/Employee/Image/Import",
@@ -31,7 +33,9 @@ function AjaxImageUpload() {
                 alert("Error when import image!");
             },
             success: function (data) {
-                alert("Success");
+                var caminho = data.caminho;
+                imageUp.attr("src", caminho);
+                campoHidden.val(caminho);            
             }
         });
     });
